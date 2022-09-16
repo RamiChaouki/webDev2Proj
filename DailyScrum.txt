@@ -1,0 +1,31 @@
+1. What I have done / not done since last Scrum?
+2. What I plan to do from this scrum to next? (next 24 hours)
+3. Where do I need assistance? What do I need to figure out?
+
+
+FRIDAY SEPTEMBER 16
+Rami
+1. What I have done / not done since last Scrum? NA
+2. What I plan to do from this scrum to next? (next 24 hours)
+Upload Project Skeleton, Implement registration
+3. Where do I need assistance? What do I need to figure out?
+****
+Dmitry
+1. What I have done / not done since last Scrum? NA
+2. What I plan to do from this scrum to next? (next 24 hours)
+-Review lectures, decide on what task to begin on for Saturday's Scrum 
+3. Where do I need assistance? What do I need to figure out?
+Kyle
+1. What I have done / not done since last Scrum? NA
+2. What I plan to do from this scrum to next? (next 24 hours)
+-Review lectures, decide on what task to begin on for Saturday's Scrum
+3. Where do I need assistance? What do I need to figure out?
+
+SATURDAY SEPTEMBER 17 12:00EST
+
+OVERVIEW:
+-Set up "User story" trello board - 1-3 days to accomplish user story
+-Guideline around 2-3 commits a day
+-10 user stories
+-midway review(tuesday or wednesday)
+-Monday 26 presentation 5min demo (prepared demo)- 20min presentation
