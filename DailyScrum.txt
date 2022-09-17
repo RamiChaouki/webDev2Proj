@@ -2,6 +2,33 @@
 2. What I plan to do from this scrum to next? (next 24 hours)
 3. Where do I need assistance? What do I need to figure out?
 
+SATURDAY SEPTEMBER 17 12:00EST
+Rami
+1. What I have done / not done since last Scrum?
+-Developed a skeleton for the project which included TODOs, env variables, configurations
+2. What I plan to do from this scrum to next? (next 24 hours)
+-Have a working backend and frontend for the registration
+3. Where do I need assistance? What do I need to figure out?
+*****
+Dmitry
+1. What I have done / not done since last Scrum?
+Finished up proposal, reviewed some concepts to fill in gaps
+2. What I plan to do from this scrum to next? (next 24 hours)
+I could start on Admin routes and html css for admin page
+3. Where do I need assistance? What do I need to figure out?
+
+*****
+Kyle
+1. What I have done / not done since last Scrum?
+I have reviewed the tutorial material.
+2. What I plan to do from this scrum to next? (next 24 hours)
+Begin working on the Posts/Feeds model, and routes.
+3. Where do I need assistance? What do I need to figure out?
+I need to figure out how we're going to pass the UserID for the posts/feeds routes.
+
+
+***********************************************************************
+
 
 FRIDAY SEPTEMBER 16
 Rami
@@ -21,7 +48,7 @@ Kyle
 -Review lectures, decide on what task to begin on for Saturday's Scrum
 3. Where do I need assistance? What do I need to figure out?
 
-SATURDAY SEPTEMBER 17 12:00EST
+
 
 OVERVIEW:
 -Set up "User story" trello board - 1-3 days to accomplish user story
