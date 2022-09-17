@@ -12,7 +12,7 @@ async function CheckActExists(req,res,next){
                                             ]
                                         }
     });
-    console.log(account.dataValues);
+    
     if(account){
         account.dataValues.username==username
             ?next(ErrorApi.conflict('Username Already Taken'))
