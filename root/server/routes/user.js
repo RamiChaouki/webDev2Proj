@@ -10,19 +10,22 @@
 
 //MIDDLEWARE
     const apiErrorHandler=require('./middleware/errorHandling/apiErrorHandler');
-    const checkActExists=require('./middleware/checkActExists');
+    // const confirmActDoesntExist=require('./middleware/confirmActDoesntExist');
+    // const confirmNoEmptyField=require('./middleware/confirmNoEmptyField');
+    const {confirmActDoesntExist,confirmNoEmptyField}=require('./middleware')
 
 //TODO:
 /**
- * middleware to make sure FIELDS NOT NULL
+ * middleware to make sure FIELDS NOT EMPTY
  * middleware to make sure PASSWORD IS LARGER THAN 6 CHARACTERS
  * middleware to make sure USERNAME and EMAIL DON'T ALREADY EXIST
  */
 
 
 
-router.post('/Register',checkActExists,apiErrorHandler,async (req,res)=>{
+router.post('/Register',confirmNoEmptyField,confirmActDoesntExist,apiErrorHandler,async (req,res)=>{
 const {firstName, lastName, username, email, password, dateOfBirth,status}=req.body;
+
 bcrypt.hash(password,10)
     .then((hash)=>{
                     Users.create({

@@ -2,7 +2,7 @@ const Users = require('../../models/user');
 const {Op}=require('sequelize');
 const ErrorApi = require('./errorHandling/ErrorApi');
 
-async function CheckActExists(req,res,next){
+async function ConfirmActDoesntExists(req,res,next){
     const {username, email} = req.body;
     const account=await Users.findOne({
                                         where:{
@@ -23,4 +23,4 @@ async function CheckActExists(req,res,next){
     next();
 }
 
-module.exports=CheckActExists;
+module.exports=ConfirmActDoesntExists;
