@@ -12,9 +12,11 @@ async function CheckActExists(req,res,next){
                                             ]
                                         }
     });
-
+    console.log(account.dataValues);
     if(account){
-        next(ErrorApi.conflict('User Already Exists'));
+        account.dataValues.username==username
+            ?next(ErrorApi.conflict('Username Already Taken'))
+            :next(ErrorApi.conflict('Email Already in Use'));
         return;
     }
 
