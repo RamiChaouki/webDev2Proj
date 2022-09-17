@@ -10,15 +10,14 @@
 
 //MIDDLEWARE
     const apiErrorHandler=require('./middleware/errorHandling/apiErrorHandler');
-    // const confirmActDoesntExist=require('./middleware/confirmActDoesntExist');
-    // const confirmNoEmptyField=require('./middleware/confirmNoEmptyField');
-    const {confirmActDoesntExist,confirmNoEmptyField}=require('./middleware')
+    const confirmActDoesntExist=require('./middleware/confirmActDoesntExist');
+    const confirmNoEmptyField=require('./middleware/confirmNoEmptyField');
 
 //TODO:
 /**
- * middleware to make sure FIELDS NOT EMPTY
- * middleware to make sure PASSWORD IS LARGER THAN 6 CHARACTERS
- * middleware to make sure USERNAME and EMAIL DON'T ALREADY EXIST
+ * middleware to make sure FIELDS NOT EMPTY -- DONE
+ * middleware to make sure PASSWORD IS LARGER THAN 6 CHARACTERS, USERNAME LARGER THAN 3 CHAR, EMAIL IS AN ACTUAL EMAIL (VALIDATOR)
+ * middleware to make sure USERNAME and EMAIL DON'T ALREADY EXIST -- DONE
  */
 
 

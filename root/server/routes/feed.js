@@ -7,7 +7,6 @@ const Posts=require('../models/post');
 
 //MIDDLEWARE
 const apiErrorHandler=require('./middleware/errorHandling/apiErrorHandler');
-const checkActExists=require('./middleware/checkActExists');
 
 //TODO: GET FEED
 // router.get("/", async (req, res)=>{
