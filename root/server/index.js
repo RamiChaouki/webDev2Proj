@@ -8,7 +8,9 @@ require('dotenv').config();
 
 //SEQUELIZE IMPORTS
 const {Sequelize,sequelize}=require('./models/sequelizeConfig');
+require('./models/associations');
 require('./models/user');
+require('./models/post')
 
 
 app.use(express.json());
