@@ -1,7 +1,16 @@
-const express=require('express');
-const router=express.Router();
-const bcrypt=require('bcrypt');
-const Users=require('../models/user');
+//EXPRESS DEPENDENCIES
+    const express=require('express');
+    const router=express.Router();
+
+//HASHING DEPENDENCY
+    const bcrypt=require('bcrypt');
+
+//MODELS
+    const Users=require('../models/user');
+
+//MIDDLEWARE
+    const apiErrorHandler=require('./middleware/errorHandling/apiErrorHandler');
+    const checkActExists=require('./middleware/checkActExists');
 
 //TODO:
 /**
@@ -12,7 +21,7 @@ const Users=require('../models/user');
 
 
 
-router.post('/Register',async (req,res)=>{
+router.post('/Register',checkActExists,apiErrorHandler,async (req,res)=>{
 const {firstName, lastName, username, email, password, dateOfBirth,status}=req.body;
 bcrypt.hash(password,10)
     .then((hash)=>{
