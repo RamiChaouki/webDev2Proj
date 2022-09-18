@@ -9,11 +9,19 @@ const Posts=require('../models/post');
 const apiErrorHandler=require('./middleware/errorHandling/apiErrorHandler');
 
 //TODO: GET FEED
-// router.get("/", async (req, res)=>{
+router.get("/", async (req, res)=>{
 
-// });
+});
 
 //TODO: POST FEED/POST
+router.post("/", apiErrorHandler, async (req, res)=>{
+    
+    const post = req.body;
+    post.userId = 1; //For testing purposes
+    await Posts.create(post);
+    res.json(post);
+
+});
 
 //TODO: POST FEED/COMMENT/:postId
 
