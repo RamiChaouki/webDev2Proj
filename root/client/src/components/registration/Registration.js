@@ -90,22 +90,25 @@ function Registration(){
                 <div className='row'>
                     <label>First Name:</label>
                     <Field name="firstName"/>
-                    <ErrorMessage   className="errorMsg"
-                                    name="firstName"/>
+                    <ErrorMessage name="firstName">
+                                    {msg=><div className="errorMsg">{msg}</div>}
+                    </ErrorMessage>
                 </div>
 
                 <div className='row'>
                     <label>Last Name:</label>
                     <Field name="lastName"/>
-                    <ErrorMessage   className="errorMsg"
-                                    name="lastName"/>
+                    <ErrorMessage name="lastName">
+                                    {msg=><div className="errorMsg">{msg}</div>}
+                    </ErrorMessage>
                 </div>
 
                 <div className='row'>
                     <label>Username:</label>
                     <Field name="username"/>
-                    <ErrorMessage   className="errorMsg"
-                                    name="username"/>
+                    <ErrorMessage name="username">
+                                    {msg=><div className="errorMsg">{msg}</div>}
+                    </ErrorMessage>
                 </div>
                 <div className="row">
                     <span className='errorMsg'>{usernameTaken}</span>
@@ -114,8 +117,9 @@ function Registration(){
                 <div className="row">
                     <label>Email:</label>    
                     <Field  name="email"/>
-                    <ErrorMessage   className="errorMsg"
-                                    name="email"/>
+                    <ErrorMessage name="email">
+                                    {msg=><div className="errorMsg">{msg}</div>}
+                    </ErrorMessage>
                 </div>
                 <div className="row">
                     <span className='errorMsg'>{emailTaken}</span>
@@ -125,8 +129,9 @@ function Registration(){
                         <label>Birthday:</label>
                         <Field  name="dateOfBirth"
                                 type="date"/>
-                        <ErrorMessage   className="errorMsg"
-                                        name="dateOfBirth"/>
+                        <ErrorMessage name="dateOfBirth">
+                                    {msg=><div className="errorMsg">{msg}</div>}
+                        </ErrorMessage>
                 </div>
                 
                 <div className="row">
@@ -134,16 +139,18 @@ function Registration(){
                     <Field  name="password"
                             type="password"
                             placeholder="Min 6 characters, Max 32 "/>
-                    <ErrorMessage   className="errorMsg"
-                                    name="password"/>
+                    <ErrorMessage name="password">
+                                    {msg=><div className="errorMsg">{msg}</div>}
+                    </ErrorMessage>
                 </div>
                 
                 <div className="row">
                     <label>Confirm Password:</label>
                     <Field  name="confirmPass"
                             type="password"/>
-                    <ErrorMessage   className="errorMsg"
-                                    name="confirmPass"/>
+                    <ErrorMessage name="confirmPass">
+                                    {msg=><div className="errorMsg">{msg}</div>}
+                    </ErrorMessage>
                 </div>
 
                 <div id="register-btn"className="row">
