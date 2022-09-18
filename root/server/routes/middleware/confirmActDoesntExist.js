@@ -13,16 +13,18 @@ async function ConfirmActDoesntExists(req,res,next){
                                                 ]
                                             }
         });
-    }catch(error){
-        next(error);
-        return;
-    }
-    if(account){
+        
+        if(account){
         account.dataValues.username==username
             ?next(ErrorApi.conflict('Username Already Taken'))
             :next(ErrorApi.conflict('Email Already in Use'));
         return;
     }
+    }catch(error){
+        next(error);
+        return;
+    }
+    
 
     next();
 }

@@ -12,6 +12,7 @@
     const apiErrorHandler=require('./middleware/errorHandling/apiErrorHandler');
     const confirmActDoesntExist=require('./middleware/confirmActDoesntExist');
     const confirmNoEmptyField=require('./middleware/confirmNoEmptyField');
+    const registrationHandler=require('./middleware/registrationHandler');
 
 //TODO:
 /**
@@ -22,7 +23,7 @@
 
 
 
-router.post('/Register',confirmNoEmptyField,confirmActDoesntExist,apiErrorHandler,async (req,res)=>{
+router.post('/Register',confirmNoEmptyField,confirmActDoesntExist,registrationHandler,apiErrorHandler,async (req,res)=>{
 const {firstName, lastName, username, email, password, dateOfBirth,status}=req.body;
 
 bcrypt.hash(password,10)

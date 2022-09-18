@@ -6,7 +6,7 @@ function apiErrorHandler(err,req,res,next){
         res.status(err.code).json(err.msg);
         return;
     }
-
+    console.log(err);
     res.status(500).json('Whoops! Something went wrong');
 }
 
