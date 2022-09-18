@@ -4,6 +4,7 @@ const ErrorApi = require('./errorHandling/ErrorApi');
 
 async function ConfirmActDoesntExists(req,res,next){
     const {username, email} = req.body;
+    const account = null;
     try{
         const account=await Users.findOne({
                                             where:{
