@@ -24,7 +24,7 @@
 
 
 router.post('/Register',confirmNoEmptyField,confirmActDoesntExist,registrationHandler,apiErrorHandler,async (req,res)=>{
-const {firstName, lastName, username, email, password, dateOfBirth,status}=req.body;
+const {firstName, lastName, username, email, password, dateOfBirth}=req.body;
 
 bcrypt.hash(password,10)
     .then((hash)=>{
@@ -35,11 +35,11 @@ bcrypt.hash(password,10)
                         email:email,
                         password:hash,
                         dateOfBirth:dateOfBirth,
-                        status:status
+                        status:'active'
                     })
         .catch((error)=>{
             console.log(error);
-            // res.status(500).json({"Error":"Error: "+ error})
+            
         });
 res.status(201).json({"Message":"User "+username+" created"});
 
