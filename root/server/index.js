@@ -12,6 +12,8 @@ require('./models/associations');
 require('./models/user');
 require('./models/post')
 
+//SEEDER
+// require('./seeders/userSeeder');
 
 app.use(express.json());
 app.use(cors());

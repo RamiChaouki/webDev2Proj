@@ -13,11 +13,13 @@
     const confirmActDoesntExist=require('./middleware/confirmActDoesntExist');
     const confirmNoEmptyField=require('./middleware/confirmNoEmptyField');
     const registrationHandler=require('./middleware/registrationHandler');
+    const confirmLogin=require('./middleware/confirmLogin');
+    const appendJWT=require('./middleware/appendJWT');
 
 //TODO:
 /**
  * middleware to make sure FIELDS NOT EMPTY -- DONE
- * middleware to make sure PASSWORD IS LARGER THAN 6 CHARACTERS, USERNAME LARGER THAN 3 CHAR, EMAIL IS AN ACTUAL EMAIL (VALIDATOR)
+ * middleware to make sure PASSWORD IS LARGER THAN 6 CHARACTERS, USERNAME LARGER THAN 3 CHAR, EMAIL IS AN ACTUAL EMAIL (VALIDATOR) -- DONE
  * middleware to make sure USERNAME and EMAIL DON'T ALREADY EXIST -- DONE
  */
 
@@ -46,6 +48,11 @@ res.status(201).json({"Message":"User "+username+" created"});
 })
 
 });
+
+router.post('/Login',confirmNoEmptyField,confirmLogin,appendJWT,apiErrorHandler,async (req,res)=>{
+    res.status(200).json({'Message':'Logged in Successfully',
+                           token:req.token });
+})
 
 
 
