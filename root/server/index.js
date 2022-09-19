@@ -15,12 +15,18 @@ require('./models/post')
 //SEEDER
 // require('./seeders/userSeeder');
 
+//MIDDLEWARES
 app.use(express.json());
 app.use(cors());
 
 
 
+
 //ROUTES
+
+//Auth router
+const authRouter=require('./routes/auth');
+app.use('/Auth',authRouter);
 
 //User router
 const userRouter = require('./routes/user');
@@ -31,8 +37,8 @@ const feedRouter = require('./routes/feed');
 app.use('/Feed',feedRouter);
 
 //Admin router
-const adminRouter = require('./routes/admin')
-app.use('/Admin',adminRouter);
+// const adminRouter = require('./routes/admin')
+// app.use('/Admin',adminRouter);
 
 
 sequelize.sync({alter:true}).then(()=>{

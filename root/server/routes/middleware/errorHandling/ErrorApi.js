@@ -17,6 +17,10 @@ class ErrorApi{
         return new ErrorApi(409,msg);
     }
 
+    static unauthorized(msg){
+        return new ErrorApi(401,msg);
+    }
+
 }
 
 module.exports=ErrorApi;

@@ -7,7 +7,7 @@ function AppendJWT(req,res,next){
                         {
                             user:req.body.account.dataValues.username,
                             id:req.body.account.dataValues.id,
-                            // role:req.body.account.dataValues.role
+                            role:req.body.account.dataValues.role
                         },
                         process.env.JWT_PRIVATE_KEY
     );
