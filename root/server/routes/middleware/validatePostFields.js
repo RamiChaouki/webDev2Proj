@@ -8,7 +8,7 @@ function validatePostFields(req,res,next){
         next(error);
         return;
     }
-    if(!validator.equals(type,"post"||"comment")){
+    if(!validator.equals(type,"comment")&&!validator.equals(type,"post")){
         error = "Type should be post or comment";
         next(ErrorApi.badRequest("Type should be a comment or post."));
         return;
