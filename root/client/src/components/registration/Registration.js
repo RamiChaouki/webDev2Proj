@@ -70,7 +70,7 @@ function Registration(){
         dateOfBirth:Yup
                     .date()
                     .max(thirteenYearsAgo,"You must be at least 13 years old to register.")
-                    .required('Please input your age.'),
+                    .required('Please input your date of birth.'),
         password:Yup.string()
                     .min(6,"Password must be at least 6 characters.")
                     .max(32,"Password must be at most 32 characters.")

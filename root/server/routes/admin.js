@@ -4,7 +4,10 @@ const user = require("../models/user");
 const apiErrorHandler=require('./middleware/errorHandling/apiErrorHandler');
 const { badRequest, internal, conflict } = require("./middleware/errorHandling/ErrorApi");
 const ErrorApi = require("./middleware/errorHandling/ErrorApi");
+const EnsureNoDuplicates = require("./middleware/ensureNoDuplicates");
 const {validateToken} = require("./middleware/JWTvalidation");
+//HASHING DEPENDENCY
+const bcrypt=require('bcrypt');
 
 //npm install react-paginate
 //in App.js - import React Paginate from "react-paginate";
@@ -17,7 +20,7 @@ async function doesUserExist(req,res,next){
     const id = req.params.id;
     const result = await user.findByPk(id);
     if(result===null){
-        // res.status(400).send("No such bid found!");
+        // res.status(400).send("No such user found!");
         req.doesUserExist='false';
         next(ErrorApi.badRequest('No such user found'));
         return;
@@ -36,8 +39,8 @@ async function doesUserExist(req,res,next){
     res.json(listOfUsers);
 });
 
-// (GET)/Admin/Admins/:role - return info for a filtered list
-router.get('/filteredList/:role', validateToken, async(req,res)=>{
+// (GET)/Admin/Admins/:role - return info for a filtered list by role
+router.get('/filterByRole/:role', validateToken, async(req,res)=>{
     //router.get('/filteredList/:role',  async(req,res)=>{ //testing line - original above. Tested: Validates token - Good, empty table - Good,broken param - returns empty arr, proper param - Good
 
     const role = req.params.role;
@@ -45,6 +48,28 @@ router.get('/filteredList/:role', validateToken, async(req,res)=>{
         role: role
     }});
     res.json(filteredList);
+});
+
+// (GET)/Admin/Admins/:role - return info for a filtered list by status
+router.get('/filterByStatus/:status', validateToken, async(req,res)=>{
+    //router.get('/filterByStatus/:status',  async(req,res)=>{ //testing line - original above. Tested: Validates token - Good, empty table - Good,broken param - returns empty arr, proper param - Good
+
+    const status = req.params.status;
+    const filteredList = await user.findAll({where:{
+        status: status
+    }});
+    res.json(filteredList);
+});
+
+// (GET)/Admin/Admins/:role - return info for a filtered list by status
+router.get('/searchByUsername/:username', validateToken, async(req,res)=>{
+    //router.get('/searchByUsername/:username',  async(req,res)=>{ //testing line - original above. Tested: Validates token - Good, empty table - Good,broken param - returns empty arr, proper param - Good
+
+    const username = req.params.username;
+    const result = await user.findAll({where:{
+        username: username
+    }});
+    res.json(result);
 });
 
 // (GET)/Admin/User/id - return info for one user (when clicking on author when browsing posts or when clicking edit)
@@ -60,17 +85,25 @@ router.get('/User/:id', validateToken, doesUserExist, apiErrorHandler, async(req
     }
 });
 
-// (PATCH)/Admin/User/:id - saves the user record from the edited line
-router.patch('/User/:id', validateToken, doesUserExist, apiErrorHandler, async(req,res)=>{
+// (PATCH)/Admin/User/:id - updates the user record from the edited line
+router.patch('/User/:id', validateToken, doesUserExist, EnsureNoDuplicates, apiErrorHandler, async(req,res)=>{
 //router.patch('/User/:id', doesUserExist, apiErrorHandler, async(req,res)=>{ //testing line - original above. Tested: Validates token - Good, empty table - Good,broken param - 400, proper param - Good
     const id = req.params.id;
-    const user = req.body;
-    await user.update({ id: `${user.id}`, username: `${user.username}`, email: `${user.email}`,
-    password: `${user.password}`, status: `${user.status}`, role: `${user.status}`,
-    }, 
-    {where: {id:`${id}`}});
-    res.json(auction);
-  });
+    const newValues = req.body;
+    if (newValues.password != null) {
+    bcrypt.hash(newValues.password, 10).then((hash)=>{
+        user.update({ id: `${newValues.id}`, username: `${newValues.username}`, email: `${newValues.email}`,
+        password: `${hash}`,status: `${newValues.status}`, role: `${newValues.role}`,
+        }, 
+        {where: {id:`${id}`}});
+    });} else {
+        user.update({ id: `${newValues.id}`, username: `${newValues.username}`, email: `${newValues.email}`,
+        status: `${newValues.status}`, role: `${newValues.role}`,
+        }, 
+        {where: {id:`${id}`}});
+    }
+    res.json(result);
+});
 
 
 
