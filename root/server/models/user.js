@@ -39,7 +39,12 @@ const user=sequelize.define('user',{
     status:{
         type:Sequelize.DataTypes.ENUM("active","banned"),
         allowNull:false ,
-    },    
+    },
+    role:{
+        type:Sequelize.DataTypes.ENUM("admin","user"), //User.getAttributes().role.values
+        allowNull:false ,
+        defaultValue: "user",
+    },   
 }, 
 {
     timestamps:false
