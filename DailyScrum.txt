@@ -2,6 +2,54 @@
 2. What I plan to do from this scrum to next? (next 24 hours)
 3. Where do I need assistance? What do I need to figure out?
 
+MONDAY SEPTEMBER 19
+Kyle
+1. What I have done / not done since last Scrum?
+Added the missing post routes.
+2. What I plan to do from this scrum to next? (next 24 hours)
+Research React implementatino of component feed - Have front-end to show for tomorrow
+3. Where do I need assistance? What do I need to figure out?
+
+Dmitry
+1. What I have done / not done since last Scrum?
+troubleshoot running project, Added search & filter routes, watched admin panel board tutorial / html and layout for admin
+2. What I plan to do from this scrum to next? (next 24 hours)
+troubleshoot running project, finish ConfirmActDoesntExists, html and layout for admin, locking rows with sequelize, look into react admin panel- Have front-end to show for tomorrow
+3. Where do I need assistance? What do I need to figure out?
+
+Rami
+1. What I have done / not done since last Scrum?
+Implemented the login w/ backend/frontend - added seeder for user
+2. What I plan to do from this scrum to next? (next 24 hours)
+-Get a hold of where the project stands , implement friend list backend and component
+3. Where do I need assistance? What do I need to figure out?
+-Get a better grasp on the concept of authContext, when to use it, when to use JWT and how to use them
+
+SUNDAY SEPTEMBER 18
+Kyle
+1. What I have done / not done since last Scrum?
+Created a post route for posts. Fixed a couple of issues with middleware. Made a post validation middleware, and added JWTvalidation middleware.
+
+2. What I plan to do from this scrum to next? (next 24 hours)
+Continue with the post routes, new middleware if needed.
+
+3. Where do I need assistance? What do I need to figure out?
+In case I bang my head against a wall with a bug that I don't understand.
+
+Dmitry
+1. What I have done / not done since last Scrum?
+done: Added GET, PATCH, DELETE routes, roles to user model, setup new user for DB, finished pagination tutorial / not done: search routes, html and layout for admin
+2. What I plan to do from this scrum to next? (next 24 hours)
+troubleshoot running project, search routes, html and layout for admin, locking rows with sequelize
+3. Where do I need assistance? What do I need to figure out?
+Having errors running the project
+
+Rami
+1. What I have done / not done since last Scrum?
+2. What I plan to do from this scrum to next? (next 24 hours)
+3. Where do I need assistance? What do I need to figure out?
+
+
 SATURDAY SEPTEMBER 17 12:00EST
 Rami
 1. What I have done / not done since last Scrum?
