@@ -51,7 +51,8 @@ res.status(201).json({"Message":"User "+username+" created"});
 
 router.post('/Login',confirmNoEmptyField,confirmLogin,appendJWT,apiErrorHandler,async (req,res)=>{
     res.status(200).json({'Message':'Logged in Successfully',
-                           token:req.token });
+                           token:req.token,
+                           auth:req.auth });
 })
 
 

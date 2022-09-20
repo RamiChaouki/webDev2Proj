@@ -1,25 +1,37 @@
-import React,{useState} from 'react';
+import React,{useEffect, useState} from 'react';
 import {useNavigate} from 'react-router-dom'
 import {Formik, Form, Field,ErrorMessage} from 'formik'
 import axios from 'axios';
 import * as Yup from 'yup';
 import './Login.css';
+import {useAuth} from '../../context/AuthContext'
 
 
 function Login() {
   const navigate=useNavigate();
   const [invalidCredentials,setInvalidCredentials]=useState("");
-  const onSubmit=(data)=>{
-    axios
-          .post('http://localhost:3001/User/Login',data)
-          .catch((error)=>{
-            setInvalidCredentials("Invalid Credentials. Please try again.")
-          })
-          .then((response)=>{
-            localStorage.setItem("token",response.data.token);
-            navigate('/');
+  const setAuthState=useAuth().setAuthState;
+  
 
-          })
+  
+  
+  const onSubmit=(data)=>{
+      axios
+            .post('http://localhost:3001/User/Login',data)
+            .catch((error)=>{
+              setInvalidCredentials("Invalid Credentials. Please try again.")
+            })
+            .then((response)=>{
+              localStorage.setItem("token",response.data.token);
+              
+              setAuthState((prev)=>({
+                ...prev,
+                id:response.data.auth.id,
+                username:response.data.auth.user,
+                role:response.data.auth.role
+              }))
+              navigate('/');
+            })
   }
 
   const validationSchema=Yup.object().shape({

@@ -13,6 +13,11 @@ function AppendJWT(req,res,next){
     );
                         
     req.token=accessToken;
+    req.auth={
+                user:req.body.account.dataValues.username,
+                id:req.body.account.dataValues.id,
+                role:req.body.account.dataValues.role
+            }
     next();
                         
 }
