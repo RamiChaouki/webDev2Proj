@@ -8,9 +8,13 @@ function Home() {
   //will fetch state on refresh!
   useEffect(()=>{getAuth();},[])
   
-  return (<>
-    <div>Home</div>
-    <div>Welcome home {useAuthState.user}</div>
+
+  return (
+    
+    
+    <>
+      <div>Home</div>
+      <div>Welcome home {useAuthState.username}</div>
     </>
   )
 }

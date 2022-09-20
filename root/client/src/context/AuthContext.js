@@ -1,16 +1,13 @@
-import React, {useContext,useEffect,useState} from 'react';
+import React, {useContext,useState} from 'react';
 import axios from 'axios';
 
 const AuthContext= React.createContext();
-const AuthUpdateContext = React.createContext();
+
 
 export function useAuth(){
     return useContext (AuthContext);
 }
 
-// export function useAuthUpdate(){
-//     return useContext(AuthUpdateContext);
-// }
 
 export function AuthProvider({children}){
     const [authState,setAuthState]=useState({
@@ -20,7 +17,7 @@ export function AuthProvider({children}){
                                             });
 
     function GetAuth(){
-        
+        if(localStorage.getItem('token')){
             axios
                 .get('http://localhost:3001/Auth',
                     {headers:{
@@ -30,13 +27,14 @@ export function AuthProvider({children}){
                 ).then((res)=>{
                     setAuthState({
                                     id:res.data.id,
-                                    user:res.data.user,
+                                    username:res.data.user,
                                     role:res.data.role
                     })
                 })
                 .catch((error)=>{
                     console.log(error);
                 })
+        }
        
     }
 
@@ -44,9 +42,7 @@ export function AuthProvider({children}){
 
     return(
         <AuthContext.Provider value={{authState,setAuthState,GetAuth}}>
-            {/* <AuthUpdateContext.Provider value={setAuthState}> */}
                 {children}
-            {/* </AuthUpdateContext.Provider>    */}
         </AuthContext.Provider>
     )
 };
