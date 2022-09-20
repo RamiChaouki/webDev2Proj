@@ -2,6 +2,31 @@
 2. What I plan to do from this scrum to next? (next 24 hours)
 3. Where do I need assistance? What do I need to figure out?
 
+TUESDAY SEPTEMBER 20
+Rami
+1. What I have done / not done since last Scrum?
+Did not manage to get to friendList table, created authcontext with role, id, username
+2. What I plan to do from this scrum to next? (next 24 hours)
+have the backend for friends list completed
+3. Where do I need assistance? What do I need to figure out?
+going to fall back into sequelize hell, might need to figure out associations and cascading
+
+Kyle
+1. What I have done / not done since last Scrum?
+Reviewed react components, working on post components
+2. What I plan to do from this scrum to next? (next 24 hours)
+Continue working on post components
+3. Where do I need assistance? What do I need to figure out?
+N/A
+
+Dmitry
+1. What I have done / not done since last Scrum?
+ensureNoDuplicate method for Patch,  tested API, started following the React admin tutorial, brushed up on Promises and Async Await, React Context API / didn't get anything to display in front end
+2. What I plan to do from this scrum to next? (next 24 hours)
+React admin for front end - finish writing custom Data Provider, Authentication and Authorization to work.
+3. Where do I need assistance? What do I need to figure out?
+Only God knows
+
 MONDAY SEPTEMBER 19
 Kyle
 1. What I have done / not done since last Scrum?
