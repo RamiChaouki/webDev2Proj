@@ -44,7 +44,7 @@ app.use('/Friend',friendRouter);
 
 
 sequelize.sync().then(()=>{
-    app.listen(process.env.S_PORT,()=>{
+    app.listen(process.env.S_PORT, ()=>{
         console.log("Listening on port "+process.env.S_PORT);
         //SEEDER
         // require('./seeders/userSeeder');
