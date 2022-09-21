@@ -20,7 +20,7 @@ function Nav() {
         </nav>
     )
   }
-  else{
+  else if(useAuthState.role==='user'){
     return(
         <nav id='nav' className='navbar navbar-expand-lg navbar-dark bg-dark'>
                 <form id="search" className="form-inline my-2 my-lg-0">
@@ -40,6 +40,9 @@ function Nav() {
                 </div>
             </nav> 
     )}
+    else if(useAuthState.role==='admin'){
+        return(<></>);
+    }
     
   
 }
