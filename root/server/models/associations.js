@@ -11,13 +11,14 @@ post.hasMany(post, {
   },
   onDelete: "cascade",
 });
-user.hasOne(post,{
+user.hasMany(post,{
     foreignKey:{
         name: "userId",
         allowNull: false,
     },
     onDelete: "cascade",
 });
+post.belongsTo(user);
 
 //FRIENDSTATUS-USER-USER ASSOCIATION
 user.hasOne(friendStatus,{as:'FriendID',foreignKey:'friendId'});

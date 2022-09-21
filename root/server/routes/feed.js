@@ -4,6 +4,7 @@ const router = express.Router();
 
 //MODELS
 const Posts = require("../models/post");
+const Users = require("../models/user");
 
 //MIDDLEWARE
 const apiErrorHandler = require("./middleware/errorHandling/apiErrorHandler");
@@ -30,6 +31,26 @@ router.post("/", validatePostFields, apiErrorHandler, async (req, res) => {
   post.userId = 1; //For testing purposes
   await Posts.create(post);
   res.json(post);
+});
+
+router.get("/getComments/:postId", async (req, res) => {
+  const postId = req.params.postId;
+  const commentList = await Posts.findAll(
+    {
+      include: [
+        {
+          model: Users,
+          attributes: ["firstName", "LastName", "username"],
+        },
+      ],
+      where: {
+        parentId: postId,
+        type: "comment",
+      },
+    },
+    {}
+  );
+  res.json(commentList);
 });
 
 //TODO: POST FEED/COMMENT/:postId
