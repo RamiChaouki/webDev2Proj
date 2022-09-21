@@ -9,8 +9,20 @@ const Posts = require("../models/post");
 const apiErrorHandler = require("./middleware/errorHandling/apiErrorHandler");
 const validatePostFields = require("./middleware/validatePostFields");
 
-//TODO: GET FEED
-router.get("/", async (req, res) => {});
+//DONE: GET FEED
+router.get("/getFeed/:userId", async (req, res) => {
+  const id = req.params.userId;
+  const posts = await Posts.findAll({ where: { userId: id, type: "post" } });
+
+  res.json(posts);
+});
+//DONE: GET SINGLE POST
+router.get("/getPost/:id", apiErrorHandler, async (req, res) => {
+  const id = req.params.id;
+  const basicInfo = await Posts.findByPk(id);
+
+  res.json(basicInfo.dataValues);
+});
 
 //TODO: POST FEED/POST
 router.post("/", validatePostFields, apiErrorHandler, async (req, res) => {
