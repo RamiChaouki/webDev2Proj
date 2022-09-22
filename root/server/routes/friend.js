@@ -31,7 +31,7 @@ router.get('/:limit([0-9]+)/:page([0-9]+)',JWTvalidation,apiErrorHandler,(req,re
                     .findAll(
                             {offset:offset,//limit and offset implement backend pagination
                             limit:limit,
-                            order:[["status","ASC"]],
+                            order:[["status","ASC"]], //returns requests first
                             include:"FriendID",
                             where:{userId:id}})
 

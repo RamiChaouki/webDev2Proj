@@ -15,6 +15,10 @@ const confirmNoEmptyField = require("./middleware/confirmNoEmptyField");
 const registrationHandler = require("./middleware/registrationHandler");
 const confirmLogin = require("./middleware/confirmLogin");
 const appendJWT = require("./middleware/appendJWT");
+const parseQuery=require("./middleware/parseQuery");
+const searchFriends=require("./middleware/searchFriends");
+const searchUsers=require("./middleware/searchUsers");
+const JWTvalidation=require("./middleware/JWTvalidation")
 
 //TODO:
 /**
@@ -73,5 +77,10 @@ router.get("/User/:id", async (req, res) => {
   });
   res.send(account)
 });
+
+//SEARCH FOR USERS BY USERNAME, FIRST NAME, or LAST NAME
+router.get('/Search/:query',JWTvalidation,parseQuery,searchFriends,searchUsers,apiErrorHandler,(req,res)=>{
+  res.status(201).json(req.params.query[0]);
+})
 
 module.exports = router;
