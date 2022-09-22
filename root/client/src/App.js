@@ -6,7 +6,8 @@ import Registration from './components/registration/Registration';
 import Home from './components/home/Home';
 import Login from './components/login/Login';
 import Nav from './components/nav/Nav';
-import Logout from './components/Logout'
+import Logout from './components/Logout';
+import Post from './components/posts/Post'
 
 //GLOBAL CONTEXTS
 import {AuthProvider} from './context/AuthContext'
@@ -23,6 +24,8 @@ function App() {
             <Route path='/' element={<UserProtectedRoute/>}>
               <Route path='/' element={<Home/>}></Route>
             </Route>
+            
+              <Route path='/Feed' element={<Post/>}></Route>
               <Route path='/Register' element={<Registration/>}></Route>
               <Route path='/Login' element={<Login/>}></Route>
               <Route path='/Logout' element={[<Logout/>]}></Route>
