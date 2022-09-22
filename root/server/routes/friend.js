@@ -27,7 +27,7 @@ router.get('/',JWTvalidation,apiErrorHandler,(req,res)=>{
 })
 
 router.get('/Send_Request/:friendId([0-9]+)',JWTvalidation,getFriendStatus,newFriendReq,apiErrorHandler,(req,res)=>{
-    res.status(201).json(req.user);
+    res.status(201).json(req.actionRequired);
 })
 
 

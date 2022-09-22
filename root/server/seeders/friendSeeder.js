@@ -4,7 +4,7 @@ const {Op}=require('sequelize');
 //All variables have to be let, not var, because otherwise they will run synchronously
   async function test(){for (let userId=1; userId<51;userId++){
             let friendsTally=[];
-            for(let connections=0;connections<20;connections++ ){
+            for(let connections=0;connections<10;connections++ ){
                 
 
                 //While Loop ensures same friend doesn't get added twice

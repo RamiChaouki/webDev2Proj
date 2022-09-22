@@ -44,7 +44,7 @@ async function NewFriendReq (req,res,next){
             });
 
             await friendStatus.create({
-                status:"Not Friends",
+                status:"Request received",
                 friendId:userId,
                 userId:friendId
 
