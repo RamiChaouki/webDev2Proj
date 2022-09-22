@@ -9,7 +9,7 @@ const friendStatus=sequelize.define(
             autoIncrement:true,
             allowNull:false,  
         },
-        type: Sequelize.DataTypes.ENUM("Not Friends", "Request sent", "Friends")
+        status: Sequelize.DataTypes.ENUM("Request received", "Request sent", "Friends")
     }
 
 )
