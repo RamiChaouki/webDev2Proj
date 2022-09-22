@@ -1,20 +1,20 @@
 //EXPRESS DEPENDENCIES
-    const express=require('express');
-    const router=express.Router();
+const express = require("express");
+const router = express.Router();
 
 //HASHING DEPENDENCY
-    const bcrypt=require('bcrypt');
+const bcrypt = require("bcrypt");
 
 //MODELS
-    const Users=require('../models/user');
+const Users = require("../models/user");
 
 //MIDDLEWARE
-    const apiErrorHandler=require('./middleware/errorHandling/apiErrorHandler');
-    const confirmActDoesntExist=require('./middleware/confirmActDoesntExist');
-    const confirmNoEmptyField=require('./middleware/confirmNoEmptyField');
-    const registrationHandler=require('./middleware/registrationHandler');
-    const confirmLogin=require('./middleware/confirmLogin');
-    const appendJWT=require('./middleware/appendJWT');
+const apiErrorHandler = require("./middleware/errorHandling/apiErrorHandler");
+const confirmActDoesntExist = require("./middleware/confirmActDoesntExist");
+const confirmNoEmptyField = require("./middleware/confirmNoEmptyField");
+const registrationHandler = require("./middleware/registrationHandler");
+const confirmLogin = require("./middleware/confirmLogin");
+const appendJWT = require("./middleware/appendJWT");
 
 //TODO:
 /**
@@ -23,38 +23,55 @@
  * middleware to make sure USERNAME and EMAIL DON'T ALREADY EXIST -- DONE
  */
 
+router.post(
+  "/Register",
+  confirmNoEmptyField,
+  confirmActDoesntExist,
+  registrationHandler,
+  apiErrorHandler,
+  async (req, res) => {
+    const { firstName, lastName, username, email, password, dateOfBirth } =
+      req.body;
 
+    bcrypt.hash(password, 10).then((hash) => {
+      Users.create({
+        firstName: firstName,
+        lastName: lastName,
+        username: username,
+        email: email,
+        password: hash,
+        dateOfBirth: dateOfBirth,
+        status: "active",
+      }).catch((error) => {
+        console.log(error);
+      });
+      res.status(201).json({ Message: "User " + username + " created" });
+    });
+  }
+);
 
-router.post('/Register',confirmNoEmptyField,confirmActDoesntExist,registrationHandler,apiErrorHandler,async (req,res)=>{
-const {firstName, lastName, username, email, password, dateOfBirth}=req.body;
+router.post(
+  "/Login",
+  confirmNoEmptyField,
+  confirmLogin,
+  appendJWT,
+  apiErrorHandler,
+  async (req, res) => {
+    res.status(200).json({
+      Message: "Logged in Successfully",
+      token: req.token,
+      auth: req.auth,
+    });
+  }
+);
 
-bcrypt.hash(password,10)
-    .then((hash)=>{
-                    Users.create({
-                        firstName:firstName,
-                        lastName:lastName,
-                        username:username,
-                        email:email,
-                        password:hash,
-                        dateOfBirth:dateOfBirth,
-                        status:'active'
-                    })
-        .catch((error)=>{
-            console.log(error);
-            
-        });
-res.status(201).json({"Message":"User "+username+" created"});
-
-})
-
+router.get("/User/:id", async (req, res) => {
+  const id = req.params.id;
+  const account = await Users.findOne({
+    attributes: {exclude: ['password']},
+    where: { id: id },
+  });
+  res.send(account)
 });
 
-router.post('/Login',confirmNoEmptyField,confirmLogin,appendJWT,apiErrorHandler,async (req,res)=>{
-    res.status(200).json({'Message':'Logged in Successfully',
-                           token:req.token,
-                           auth:req.auth });
-})
-
-
-
-module.exports=router;
+module.exports = router;

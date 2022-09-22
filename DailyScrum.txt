@@ -2,6 +2,32 @@
 2. What I plan to do from this scrum to next? (next 24 hours)
 3. Where do I need assistance? What do I need to figure out?
 
+WEDNESDAY SEPTEMBER 21
+Rami
+1. What I have done / not done since last Scrum?
+-Created protected routes for user and admin with the help of Dmitry, created a friendstatus model and seeder
+2. What I plan to do from this scrum to next? (next 24 hours)
+Finish the routes on the server, create components on the front end
+3. Where do I need assistance? What do I need to figure out?
+TBD
+
+Dmitry
+1. What I have done / not done since last Scrum?
+mostly dealing with issues of integrating Rami's custom authentication and React-Admin's, understanding how Router, Outlet, Protected Routes work/was not able to get Authentication to work and did not get to CustomDataProvider
+2. What I plan to do from this scrum to next? (next 24 hours)
+figure out if still feasible to pursue React-Admin and either make some progress with proper routings/ Authentication or CustomDataProvider with React Admin
+OR start working on React components for Non-React-Admin solution
+3. Where do I need assistance? What do I need to figure out?
+Need more time experimenting with code to formulate my questions
+
+Kyle
+1. What I have done / not done since last Scrum?
+Fixed the component for a single post.
+2. What I plan to do from this scrum to next? (next 24 hours)
+Continue working on components for comments/feeds.
+3. Where do I need assistance? What do I need to figure out?
+When nessesary, I will ask.
+
 TUESDAY SEPTEMBER 20
 Rami
 1. What I have done / not done since last Scrum?

@@ -4,13 +4,26 @@ const router = express.Router();
 
 //MODELS
 const Posts = require("../models/post");
+const Users = require("../models/user");
 
 //MIDDLEWARE
 const apiErrorHandler = require("./middleware/errorHandling/apiErrorHandler");
 const validatePostFields = require("./middleware/validatePostFields");
 
-//TODO: GET FEED
-router.get("/", async (req, res) => {});
+//DONE: GET FEED
+router.get("/getFeed/:userId", async (req, res) => {
+  const id = req.params.userId;
+  const posts = await Posts.findAll({ where: { userId: id, type: "post" } });
+
+  res.json(posts);
+});
+//DONE: GET SINGLE POST
+router.get("/getPost/:id", apiErrorHandler, async (req, res) => {
+  const id = req.params.id;
+  const basicInfo = await Posts.findByPk(id);
+
+  res.json(basicInfo.dataValues);
+});
 
 //TODO: POST FEED/POST
 router.post("/", validatePostFields, apiErrorHandler, async (req, res) => {
@@ -18,6 +31,26 @@ router.post("/", validatePostFields, apiErrorHandler, async (req, res) => {
   post.userId = 1; //For testing purposes
   await Posts.create(post);
   res.json(post);
+});
+
+router.get("/getComments/:postId", async (req, res) => {
+  const postId = req.params.postId;
+  const commentList = await Posts.findAll(
+    {
+      include: [
+        {
+          model: Users,
+          attributes: ["firstName", "LastName", "username"],
+        },
+      ],
+      where: {
+        parentId: postId,
+        type: "comment",
+      },
+    },
+    {}
+  );
+  res.json(commentList);
 });
 
 //TODO: POST FEED/COMMENT/:postId
