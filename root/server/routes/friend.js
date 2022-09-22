@@ -14,12 +14,27 @@ const newFriendReq = require('./middleware/newFriendReq');
 
 
 
-router.get('/',JWTvalidation,apiErrorHandler,(req,res)=>{
+router.get('/:limit([0-9]+)/:page([0-9]+)',JWTvalidation,apiErrorHandler,(req,res)=>{
     const {id}=req.user;
+
+    var limit=0;
+    var offset=0;
+
+    if(!req.params.limit||!req.params.page){
+        limit=10;
+        req.params.page=1;
+    }
+    limit=Number(req.params.limit);//Params were coming out as string, which was messing up the mySQL query --- Not the most elegant solution
+
+    offset=Number(limit*(Number(req.params.page)-1))//assumes pages start at 1
     friendStatus
-                    .findAll({include:"FriendID"},
-                            {where:
-                                    {userId:id}})
+                    .findAll(
+                            {offset:offset,//limit and offset implement backend pagination
+                            limit:limit,
+                            order:[["status","ASC"]],
+                            include:"FriendID",
+                            where:{userId:id}})
+
                     .then((friendList)=>{
                         res.status(200).json(friendList);
                     })
