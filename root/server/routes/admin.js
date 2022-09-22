@@ -5,7 +5,7 @@ const apiErrorHandler=require('./middleware/errorHandling/apiErrorHandler');
 const { badRequest, internal, conflict } = require("./middleware/errorHandling/ErrorApi");
 const ErrorApi = require("./middleware/errorHandling/ErrorApi");
 const EnsureNoDuplicates = require("./middleware/ensureNoDuplicates");
-const {validateToken} = require("./middleware/JWTvalidation");
+const validateToken = require("./middleware/JWTvalidation");
 //HASHING DEPENDENCY
 const bcrypt=require('bcrypt');
 
@@ -33,9 +33,11 @@ async function doesUserExist(req,res,next){
 *   ROUTES
 */
 // (GET)/Admin/Users - return info for a list of all users
-//router.get('/Users',validateToken, async(req,res)=>{
-    router.get('/Users', async(req,res)=>{  //testing line - original above. Tested: Validates token - Good, empty table - Good, 
+// router.get('/Users',validateToken,async(req,res)=>{
+router.get('/Users', async(req,res,next)=>{  //testing line - original above. Tested: Validates token - Good, empty table - Good, 
     const listOfUsers = await user.findAll();
+    res.setHeader('Access-Control-Expose-Headers', 'Content-Range');
+    res.setHeader('Content-Range', 'Users 0-2/4');
     res.json(listOfUsers);
 });
 
@@ -86,8 +88,8 @@ router.get('/User/:id', validateToken, doesUserExist, apiErrorHandler, async(req
 });
 
 // (PATCH)/Admin/User/:id - updates the user record from the edited line
-router.patch('/User/:id', validateToken, doesUserExist, EnsureNoDuplicates, apiErrorHandler, async(req,res)=>{
-//router.patch('/User/:id', doesUserExist, apiErrorHandler, async(req,res)=>{ //testing line - original above. Tested: Validates token - Good, empty table - Good,broken param - 400, proper param - Good
+// router.patch('/User/:id', validateToken, doesUserExist, EnsureNoDuplicates, apiErrorHandler, async(req,res)=>{
+router.patch('/User/:id', doesUserExist, apiErrorHandler, async(req,res)=>{ //testing line - original above. Tested: Validates token - Good, empty table - Good,broken param - 400, proper param - Good
     const id = req.params.id;
     const newValues = req.body;
     if (newValues.password != null) {

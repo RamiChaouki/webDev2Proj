@@ -11,24 +11,51 @@ import Logout from './components/Logout'
 //GLOBAL CONTEXTS
 import {AuthProvider} from './context/AuthContext'
 import UserProtectedRoute from './components/UserProtectedRoute';
+import AdminProtectedRoute from './components/AdminProtectedRoute';
 
-
+// react-admin imports
+import * as React from "react";
+import {Admin, Resource} from 'react-admin';
+import RestProvider from 'ra-data-simple-rest';
+import UserList from './components/adminpanel/UserList';
+// import {UserCreate} from './components/adminpanel/UserCreate'
+//${process.env.S_PORT}
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
         <AuthProvider>
-          <Nav/>  
+            
           <Routes>
+
             <Route path='/' element={<UserProtectedRoute/>}>
-              <Route path='/' element={<Home/>}></Route>
+              <Route path='/' element={[<Nav/>,<Home/>]}></Route>
             </Route>
-              <Route path='/Register' element={<Registration/>}></Route>
-              <Route path='/Login' element={<Login/>}></Route>
-              <Route path='/Logout' element={[<Home/>,<Logout/>]}></Route>
+              <Route path='/Register' element={[<Nav/>,<Registration/>]}></Route>
+              <Route path='/Login' element={[<Nav/>,<Login/>]}></Route>
+              <Route path='/Logout' element={[<Nav/>,<Home/>,<Logout/>]}></Route>
+
+              {/* <Route path='/Admin' element={<AdminProtectedRoute/>}> */}
+              <Route path='/Admin/*' element={      
+                <Admin
+                  basename="/Admin"
+                  dataProvider={RestProvider(`http://localhost:3001/Admin`)}
+                  //loginPage={MyLoginPage}
+                  //authProvider={AuthProvider}
+                  >
+                  <Resource 
+                    name="Users"
+                    list={UserList}
+                    options={{label: "Users"}}
+                    />
+                </Admin>}>
+              {/* </Route> */}
+            </Route>
           </Routes>
         </AuthProvider>
       </BrowserRouter>
+      
+
     </div>
   );
 }
