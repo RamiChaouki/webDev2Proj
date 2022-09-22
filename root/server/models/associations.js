@@ -20,6 +20,14 @@ user.hasOne(post,{
 });
 
 //FRIENDSTATUS-USER-USER ASSOCIATION
-user.hasOne(friendStatus,{as:'FriendID',foreignKey:'friendId'});
-user.hasOne(friendStatus,{as:'UserID',foreignKey:'userId'});
-friendStatus.belongsTo(user);
+// user.hasOne(friendStatus,{as:'FriendID',foreignKey:'friendId'});
+// user.hasOne(friendStatus,{as:'UserID',foreignKey:'userId'});
+// friendStatus.belongsTo(user);
+
+user.hasMany(
+              friendStatus,
+              {onDelete:"cascade"}
+);
+
+friendStatus.belongsTo(user,{as:'FriendID',foreignKey:'friendId'})
+friendStatus.belongsTo(user,{as:'UserID',foreignKey:'userId'});
