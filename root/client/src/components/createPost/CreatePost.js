@@ -3,30 +3,33 @@ import axios from "axios";
 import * as Yup from "yup";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useNavigate } from "react-router-dom";
-import {useAuth} from '../../context/AuthContext';
+import { useAuth } from "../../context/AuthContext";
 
 function CreatePost() {
   const navigate = useNavigate();
-  const useAuthState=useAuth().authState;
-  const getAuth=useAuth().GetAuth;
+  const useAuthState = useAuth().authState;
+  const getAuth = useAuth().GetAuth;
 
-    useEffect(()=>{
-        getAuth();
-    },[])
+  useEffect(() => {
+    getAuth();
+  }, []);
   // const []=useState("");
   // const [emailTaken,setEmailTaken]=useState("");
 
-  const onSubmit = async (data) => {
+  const onSubmit = (data) => {
     data.date = new Date();
     data.parentId = useAuthState.id;
-    await axios
-      .post("http://localhost:3001/Feed/Register", data)
-      .then((res) => {});
+    axios.post("http://localhost:3001/Feed/newPost", data).then((res) => {
+      console.log("Post sent successfully");
+      console.log(res);
+      navigate("/");
+    });
   };
   const initialValues = {
     postText: "",
     type: "post",
-    postDate: "",
+    postDate: new Date(),
+    parentId: useAuthState.id
   };
 
   const validationSchema = Yup.object().shape({
