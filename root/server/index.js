@@ -39,8 +39,8 @@ const friendRouter= require('./routes/friend');
 app.use('/Friend',friendRouter);
 
 //Admin router
-// const adminRouter = require('./routes/admin')
-// app.use('/Admin',adminRouter);
+const adminRouter = require('./routes/admin');
+app.use('/Admin',adminRouter);
 
 
 sequelize.sync({alter:true}).then(()=>{
