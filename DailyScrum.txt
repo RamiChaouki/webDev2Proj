@@ -2,6 +2,55 @@
 2. What I plan to do from this scrum to next? (next 24 hours)
 3. Where do I need assistance? What do I need to figure out?
 
+FRIDAY SEPTEMBER 23
+Kyle
+1. What I have done / not done since last Scrum?
+Create post completed. Started work on CreateComment under post.
+2. What I plan to do from this scrum to next? (next 24 hours)
+Finish Create Comment.
+3. Where do I need assistance? What do I need to figure out?
+When nessesary, I will ask.
+
+Rami
+1. What I have done / not done since last Scrum?
+Created a search function to look up users through the friend's table and user table and resolve any conflicts
+2. What I plan to do from this scrum to next? (next 24 hours)
+Finish implementing search front page, friends front page, and begin with S3 and user profiles
+3. Where do I need assistance? What do I need to figure out?
+Hooks are going to be my biggest challenge
+
+Dmitry
+1. What I have done / not done since last Scrum?
+push changes, add protected routes or authentication within react-admin, added Logout and ToggleTheme/ display more fields, fix JWT and token validation
+2. What I plan to do from this scrum to next? (next 24 hours)
+display more fields, fix JWT and token validation, get pagination to work properly
+3. Where do I need assistance? What do I need to figure out?
+Most likely JWT and token validation
+
+THURSDAY SEPTEMBER 22
+Rami
+1. What I have done / not done since last Scrum?
+Continued developing the routes for user, implemented pagination on the backend
+2. What I plan to do from this scrum to next? (next 24 hours)
+Get started on the frontend of the user experience
+3. Where do I need assistance? What do I need to figure out?
+
+Kyle
+1. What I have done / not done since last Scrum?
+Started work on comments/CreatePost
+2. What I plan to do from this scrum to next? (next 24 hours)
+Continue working on comments/CreatePost.
+3. Where do I need assistance? What do I need to figure out?
+When nessesary, I will ask.
+
+Dmitry
+1. What I have done / not done since last Scrum?
+Fixed nav rendering issues, got the dataProvider to work, troubleshooted with guys to get the table to display / N/A
+2. What I plan to do from this scrum to next? (next 24 hours)
+Push changes, fix edit delete methods, display more fields, add protected routes or authentication within react-admin
+3. Where do I need assistance? What do I need to figure out?
+At this point not encountering any specific issues
+
 WEDNESDAY SEPTEMBER 21
 Rami
 1. What I have done / not done since last Scrum?
