@@ -5,7 +5,8 @@ const AuthContext= React.createContext();
 
 
 export function useAuth(){
-    return useContext (AuthContext);
+    return useContext (AuthContext); //returns a function which once run returns an object with the values you placed in it. In this case it returns {authState,setAuthState,GetAuth}
+    //you can call this object.prop to use the prop
 }
 
 

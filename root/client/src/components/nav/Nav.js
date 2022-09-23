@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import {Link} from 'react-router-dom'
 import './Nav.css'
-import {useAuth} from '../../context/AuthContext'
+import {useAuth} from '../../context/AuthContext' //returns a function, that when run returns this object:{authState,setAuthState,GetAuth}
 
 function Nav() {
   const useAuthState=useAuth().authState;

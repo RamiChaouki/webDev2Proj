@@ -18,7 +18,8 @@ const appendJWT = require("./middleware/appendJWT");
 const parseQuery=require("./middleware/parseQuery");
 const searchFriends=require("./middleware/searchFriends");
 const searchUsers=require("./middleware/searchUsers");
-const JWTvalidation=require("./middleware/JWTvalidation")
+const JWTvalidation=require("./middleware/JWTvalidation");
+const mergeFriendUserQuery = require("./middleware/mergeFriendUserQuery");
 
 //TODO:
 /**
@@ -79,8 +80,16 @@ router.get("/User/:id", async (req, res) => {
 });
 
 //SEARCH FOR USERS BY USERNAME, FIRST NAME, or LAST NAME
-router.get('/Search/:query',JWTvalidation,parseQuery,searchFriends,searchUsers,apiErrorHandler,(req,res)=>{
-  res.status(201).json(req.params.query[0]);
+router.get(
+  '/Search/:limit/:page/:query',
+  JWTvalidation,
+  parseQuery,
+  searchFriends,
+  searchUsers,
+  mergeFriendUserQuery,
+  apiErrorHandler,
+  (req,res)=>{
+  res.status(201).json(req.mergeList);
 })
 
 module.exports = router;
