@@ -7,12 +7,9 @@ import Home from './components/home/Home';
 import Login from './components/login/Login';
 import Nav from './components/nav/Nav';
 import Logout from './components/Logout';
-<<<<<<< HEAD
-import Post from './components/posts/Post';
 import FriendList from './components/friendList/FriendList';
-=======
 import CreatePost from './components/createPost/CreatePost'
->>>>>>> 20c8ec380a2ef4f9db53e374c5d0cdceb1bc272f
+
 
 //GLOBAL CONTEXTS
 import {AuthProvider} from './context/AuthContext'
