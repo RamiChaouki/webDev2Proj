@@ -7,7 +7,9 @@ import Home from './components/home/Home';
 import Login from './components/login/Login';
 import Nav from './components/nav/Nav';
 import Logout from './components/Logout';
+import FriendList from './components/friendList/FriendList';
 import CreatePost from './components/createPost/CreatePost'
+
 
 //GLOBAL CONTEXTS
 import {AuthProvider} from './context/AuthContext'
@@ -32,7 +34,8 @@ function App() {
           <Routes>
 
             <Route path='/' element={<UserProtectedRoute/>}>
-              <Route path='/' element={[<Home/>]}></Route>
+              <Route path='/' element={[<Nav/>,<Home/>]}></Route>
+              <Route path='Friend' element={[<Nav/>,<FriendList/>]}></Route>
               <Route path='/NewPost' element={<CreatePost/>}></Route>
             </Route>
               <Route path='/Register' element={[<Registration/>]}></Route>

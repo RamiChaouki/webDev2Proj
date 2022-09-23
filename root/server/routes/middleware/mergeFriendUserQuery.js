@@ -3,7 +3,7 @@ function MergeFriendUserQuery(req,res,next){
     const page=Number(req.params.page);
     const offset=limit*(page-1);
     
-    
+    //Maps from search middlewares
     const friendsMap=req.friendsMap;
     var usersMap=req.usersMap;
 
@@ -26,6 +26,7 @@ function MergeFriendUserQuery(req,res,next){
         mergeList.push(value);
     }
     
+    //Pagination
     req.mergeList=mergeList.slice(offset,offset+limit)
     next();
     return;

@@ -1,0 +1,72 @@
+#friend-card{
+    width:400px;
+    height: 100px;
+    box-shadow:0 0 10px black ;
+    border-radius: 3px;
+    font-size: 12px;
+    margin: 10px;
+}
+
+#profile-pic{
+    padding: 10px 0 10px 0;
+}
+
+#accept-req-btn{
+    width: 30px;
+    height: 30px;
+    padding: 6px 0px;
+    border-radius: 15px;
+    text-align: center;
+    font-size: 12px;
+    line-height: 1.42857;
+    background-color: #02F246;
+    transition: background-color 0.2s ;
+    margin: 5px;
+}
+
+#accept-req-btn:hover{
+    background-color: #03b034;
+    cursor: pointer;
+}
+
+#decline-req-btn{
+    width: 30px;
+    height: 30px;
+    margin:5px;
+    border-radius: 5px;
+    background-color: #d0460b;
+    transition: background-color 0.2s ;
+}
+
+#decline-req-btn:hover{
+    background-color: #814328;
+    cursor: pointer;
+}
+
+#status{
+    margin-bottom: 0px;
+    text-align: center;
+}
+
+#col3{
+    text-align: center;
+}
+
+a:link {
+    text-decoration: none;
+    color: #cc850a;
+  }
+  
+  a:visited {
+    text-decoration: none;
+    color: #cc850a;
+  }
+  
+  a:hover {
+    text-decoration: none;
+    color: #47a1ad;
+  }
+  
+  a:active {
+    text-decoration: none;
+  }
