@@ -7,7 +7,7 @@ import Home from './components/home/Home';
 import Login from './components/login/Login';
 import Nav from './components/nav/Nav';
 import Logout from './components/Logout';
-import Post from './components/posts/Post'
+import CreatePost from './components/createPost/CreatePost'
 
 //GLOBAL CONTEXTS
 import {AuthProvider} from './context/AuthContext'
@@ -31,6 +31,7 @@ function App() {
 
             <Route path='/' element={<UserProtectedRoute/>}>
               <Route path='/' element={[<Nav/>,<Home/>]}></Route>
+              <Route path='/NewPost' element={<CreatePost/>}></Route>
             </Route>
               <Route path='/Register' element={[<Nav/>,<Registration/>]}></Route>
               <Route path='/Login' element={[<Nav/>,<Login/>]}></Route>
@@ -53,7 +54,7 @@ function App() {
               {/* </Route> */}
             </Route>
             
-              <Route path='/Feed' element={<Post/>}></Route>
+              {/* <Route path='/Feed' element={<Post/>}></Route> */}
               <Route path='/Register' element={<Registration/>}></Route>
               <Route path='/Login' element={<Login/>}></Route>
               <Route path='/Logout' element={[<Logout/>]}></Route>
