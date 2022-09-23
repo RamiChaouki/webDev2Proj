@@ -34,7 +34,7 @@ function App() {
           <Routes>
 
             <Route path='/' element={<UserProtectedRoute/>}>
-              <Route path='/' element={[<Nav/>,<Home/>]}></Route>
+              <Route path='/' element={[<Home/>]}></Route>
               <Route path='Friend' element={[<Nav/>,<FriendList/>]}></Route>
               <Route path='/NewPost' element={<CreatePost/>}></Route>
             </Route>
