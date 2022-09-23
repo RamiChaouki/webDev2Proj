@@ -9,12 +9,12 @@ const Users = require("../models/user");
 //MIDDLEWARE
 const apiErrorHandler = require("./middleware/errorHandling/apiErrorHandler");
 const validatePostFields = require("./middleware/validatePostFields");
+const validateToken = require('./middleware/JWTvalidation');
 
 //TODO: Get a feed
-router.get("/getFeed/:userId", async (req, res) => {
-  const id = req.params.userId;
+router.get("/getFeed/",validateToken, async (req, res) => {
+  const id = req.user.id;
   const posts = await Posts.findAll({ where: { userId: id, type: "post" } }); //Needs to be reworked to add friends as well.
-
   res.json(posts);
 });
 //DONE: Get a single post
@@ -26,7 +26,7 @@ router.get("/getPost/:id", apiErrorHandler, async (req, res) => {
 });
 
 //TODO: Create a new post
-router.post("/newPost", validatePostFields, apiErrorHandler, async (req, res) => {
+router.post("/newPost", validateToken, validatePostFields, apiErrorHandler, async (req, res) => {
   const post = req.body;
   // post.userId = 1; For testing purposes
   await Posts.create(post);

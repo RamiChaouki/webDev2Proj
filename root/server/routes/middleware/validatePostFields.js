@@ -3,8 +3,8 @@ const validator = require('validator');
 const ErrorApi = require('./errorHandling/ErrorApi');
 
 function validatePostFields(req,res,next){
-    const {postText, type, postDate, parentId} = req.body;
-    if(!postText||!type ||!postDate||!parentId){
+    const {postText, type, postDate, userId} = req.body;
+    if(!postText||!type ||!postDate||!userId){
         next(error);
         return;
     }
