@@ -29,15 +29,23 @@ async function doesUserExist(req,res,next){
     next();
 }
 
+// returns count of total number of users
+async function getUserCount(req,res,next){
+    const {count, rows} = await user.findAndCountAll();
+    req.count=`Users 0-5/${count}`;
+    console.log(req.count);
+    next();
+}
+
 /**
 *   ROUTES
 */
 // (GET)/Admin/Users - return info for a list of all users
-// router.get('/Users',validateToken,async(req,res)=>{
-router.get('/Users', async(req,res,next)=>{  //testing line - original above. Tested: Validates token - Good, empty table - Good, 
+// router.get('/Users',validateToken, getUserCount,async(req,res)=>{
+router.get('/Users', getUserCount, async(req,res,next)=>{  //testing line - original above. Tested: Validates token - Good, empty table - Good, 
     const listOfUsers = await user.findAll();
     res.setHeader('Access-Control-Expose-Headers', 'Content-Range');
-    res.setHeader('Content-Range', 'Users 0-2/4');
+    res.setHeader('Content-Range', req.count);
     res.json(listOfUsers);
 });
 
@@ -75,8 +83,8 @@ router.get('/searchByUsername/:username', validateToken, async(req,res)=>{
 });
 
 // (GET)/Admin/User/id - return info for one user (when clicking on author when browsing posts or when clicking edit)
-router.get('/User/:id', validateToken, doesUserExist, apiErrorHandler, async(req, res, next)=>{
-    //router.get('/User/:id', doesUserExist, apiErrorHandler, async(req, res, next)=>{  //testing line - original above. Tested: Validates token - Good, empty table - Good,broken param - returns empty arr, proper param - Good
+// router.get('/User/:id', validateToken, doesUserExist, apiErrorHandler, async(req, res, next)=>{
+    router.get('/User/:id', doesUserExist, apiErrorHandler, async(req, res, next)=>{  //testing line - original above. Tested: Validates token - Good, empty table - Good,broken param - returns empty arr, proper param - Good
 
     const id = req.params.id;
     if (req.doesUserExist==='true'){
@@ -110,7 +118,7 @@ router.patch('/User/:id', doesUserExist, apiErrorHandler, async(req,res)=>{ //te
 
 
 // (DELETE)/Admin/User/:userId - deletes selected user by pressing X
-router.delete('/User/:id', validateToken, doesUserExist, apiErrorHandler, async(req,res)=>{
+router.delete('/Users/:id', validateToken, doesUserExist, apiErrorHandler, async(req,res,next)=>{
 //    router.delete('/User/:id', doesUserExist, apiErrorHandler, async(req,res)=>{ //testing line - original above. Tested: Validates token - Good, empty table - Good,broken param - 400, proper param - Good
 
     const id = req.params.id;
