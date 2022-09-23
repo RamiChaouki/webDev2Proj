@@ -10,14 +10,14 @@ const Users = require("../models/user");
 const apiErrorHandler = require("./middleware/errorHandling/apiErrorHandler");
 const validatePostFields = require("./middleware/validatePostFields");
 
-//DONE: GET FEED
+//TODO: Get a feed
 router.get("/getFeed/:userId", async (req, res) => {
   const id = req.params.userId;
-  const posts = await Posts.findAll({ where: { userId: id, type: "post" } });
+  const posts = await Posts.findAll({ where: { userId: id, type: "post" } }); //Needs to be reworked to add friends as well.
 
   res.json(posts);
 });
-//DONE: GET SINGLE POST
+//DONE: Get a single post
 router.get("/getPost/:id", apiErrorHandler, async (req, res) => {
   const id = req.params.id;
   const basicInfo = await Posts.findByPk(id);
@@ -25,14 +25,15 @@ router.get("/getPost/:id", apiErrorHandler, async (req, res) => {
   res.json(basicInfo.dataValues);
 });
 
-//TODO: POST FEED/POST
-router.post("/", validatePostFields, apiErrorHandler, async (req, res) => {
+//TODO: Create a new post
+router.post("/newPost", validatePostFields, apiErrorHandler, async (req, res) => {
   const post = req.body;
-  post.userId = 1; //For testing purposes
+  // post.userId = 1; For testing purposes
   await Posts.create(post);
   res.json(post);
 });
 
+// Get the comments of a post
 router.get("/getComments/:postId", async (req, res) => {
   const postId = req.params.postId;
   const commentList = await Posts.findAll(
@@ -55,7 +56,7 @@ router.get("/getComments/:postId", async (req, res) => {
 
 //TODO: POST FEED/COMMENT/:postId
 router.post(
-  "/:postId",
+  "/addComment/:postId",
   validatePostFields,
   apiErrorHandler,
   async (req, res) => {
@@ -67,8 +68,7 @@ router.post(
   }
 );
 
-//TODO: DELETE FEED/COMMENT/:postId
-//TODO: DELETE FEED/:commentId
+// Delete a post/comment
 router.delete("/delete/:postId", async (req, res) => {
   const postId = req.params.postId;
   await Posts.destroy({

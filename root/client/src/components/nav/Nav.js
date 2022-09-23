@@ -33,6 +33,7 @@ function Nav() {
                     </button>
                     <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                         <li><Link className="dropdown-item" href="#">Feed</Link></li>
+                        <li><Link className='dropdown-item' to='/NewPost'>Create a new Post</Link></li>
                         <li><Link className="dropdown-item" href="#">Edit Profile</Link></li>
                         <div className="dropdown-divider"></div>
                         <li><Link className="dropdown-item" to='/Logout'>Logout</Link></li>
