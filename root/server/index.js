@@ -49,5 +49,7 @@ sequelize.sync().then(()=>{
         //SEEDER
         // require('./seeders/userSeeder');
         // require('./seeders/friendSeeder')();
+        // require('./seeders/postSeeder');
+        // require('./seeders/commentSeeder');
     })
 });

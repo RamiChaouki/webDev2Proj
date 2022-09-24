@@ -22,6 +22,8 @@ import * as React from "react";
 import {Admin, Resource} from 'react-admin';
 import RestProvider from 'ra-data-simple-rest';
 import UserList from './components/adminpanel/UserList';
+import MyAppBar from './components/adminpanel/MyAppBar';
+import MyLayout from './components/adminpanel/MyLayout';
 // import {UserCreate} from './components/adminpanel/UserCreate'
 //${process.env.S_PORT}
 function App() {
@@ -30,38 +32,39 @@ function App() {
       <BrowserRouter>
         <AuthProvider>
         <QueryProvider>
+        <Nav/>
           <Routes>
 
             <Route path='/' element={<UserProtectedRoute/>}>
-              <Route path='/' element={[<Nav/>,<Home/>]}></Route>
-              <Route path='Friends' element={[<Nav/>,<FriendList/>]}></Route>
+              <Route path='/' element={[<Home/>]}></Route>
+              <Route path='Friends' element={[<FriendList/>]}></Route>
               <Route path='/NewPost' element={<CreatePost/>}></Route>
             </Route>
-              <Route path='/Register' element={[<Nav/>,<Registration/>]}></Route>
-              <Route path='/Login' element={[<Nav/>,<Login/>]}></Route>
-              <Route path='/Logout' element={[<Nav/>,<Home/>,<Logout/>]}></Route>
+              <Route path='/Register' element={[<Registration/>]}></Route>
+              <Route path='/Login' element={[<Login/>]}></Route>
+              <Route path='/Logout' element={[<Home/>,<Logout/>]}></Route>
 
-              {/* <Route path='/Admin' element={<AdminProtectedRoute/>}> */}
+              <Route path='/Admin' element={<AdminProtectedRoute/>}>
               <Route path='/Admin/*' element={      
-                <Admin
+                <Admin layout={MyLayout}
                   basename="/Admin"
                   dataProvider={RestProvider(`http://localhost:3001/Admin`)}
-                  //loginPage={MyLoginPage}
-                  //authProvider={AuthProvider}
+                  // authProvider={AuthProvider}
                   >
+                  
                   <Resource 
                     name="Users"
                     list={UserList}
                     options={{label: "Users"}}
                     />
                 </Admin>}>
-              {/* </Route> */}
+              </Route>
             </Route>
             
               {/* <Route path='/Feed' element={<Post/>}></Route> */}
-              <Route path='/Register' element={<Registration/>}></Route>
-              <Route path='/Login' element={<Login/>}></Route>
-              <Route path='/Logout' element={[<Logout/>]}></Route>
+              {/* <Route path='/Register' element={<Registration/>}></Route>
+              <Route path='/Login' element={<Login/>}></Route>*/}
+              <Route path='/Logout' element={[<Home/>,<Logout/>]}></Route>
           </Routes>
         </QueryProvider>
         </AuthProvider>

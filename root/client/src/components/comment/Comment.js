@@ -1,8 +1,10 @@
 import React from 'react'
 
-function Comment() {
+function Comment(props) {
   return (
-    <div>Comment</div>
+    <div className='commentCard'>
+        <div className='commentBody'></div>
+    </div>
   )
 }
 

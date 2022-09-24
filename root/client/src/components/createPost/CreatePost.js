@@ -3,34 +3,42 @@ import axios from "axios";
 import * as Yup from "yup";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useNavigate } from "react-router-dom";
-import {useAuth} from '../../context/AuthContext';
+import { useAuth } from "../../context/AuthContext";
 
 function CreatePost() {
   const navigate = useNavigate();
-  const useAuthState=useAuth().authState;
-  const getAuth=useAuth().GetAuth;
+  const useAuthState = useAuth().authState;
+  const getAuth = useAuth().GetAuth;
 
-    useEffect(()=>{
-        getAuth();
-    },[])
+  useEffect(() => {
+    getAuth();
+  }, []);
   // const []=useState("");
   // const [emailTaken,setEmailTaken]=useState("");
 
-  const onSubmit = async (data) => {
-    data.date = new Date();
-    data.parentId = useAuthState.id;
-    await axios
-      .post("http://localhost:3001/Feed/Register", data)
-      .then((res) => {});
+  const onSubmit = (data) => {
+    const date = new Date();
+    data.date = date.toISOString();
+    data.userId = useAuthState.id;
+    axios
+      .post("http://localhost:3001/Feed/newPost", data, {
+        headers: { accessToken: localStorage.getItem("token") },
+      })
+      .then((res) => {
+        console.log("Post sent successfully");
+        console.log(res);
+        navigate("/");
+      });
   };
   const initialValues = {
     postText: "",
     type: "post",
-    postDate: "",
+    postDate: new Date(),
+    userId: useAuthState.id,
   };
 
   const validationSchema = Yup.object().shape({
-    firstName: Yup.string().required("Please type in your post."),
+    postText: Yup.string().required("Please type in your post."),
   });
 
   return (
@@ -45,7 +53,7 @@ function CreatePost() {
             <label>Post:</label>
             <Field name="postText" />
             <ErrorMessage name="postText">
-              {(msg) => <div className="errorMsg">{msg}</div>}
+              {/* {(msg) => <div className="errorMsg">{msg}</div>} */}
             </ErrorMessage>
           </div>
           <div className="row">

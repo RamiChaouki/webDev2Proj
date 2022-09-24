@@ -30,7 +30,8 @@ function Login() {
                 username:response.data.auth.user,
                 role:response.data.auth.role
               }))
-              navigate('/');
+              if (response.data.auth.role === "user"){navigate('/');}
+              else if (response.data.auth.role === "admin") {navigate('/Admin/Users');}
             })
   }
 
