@@ -8,7 +8,8 @@ import Login from './components/login/Login';
 import Nav from './components/nav/Nav';
 import Logout from './components/Logout';
 import FriendList from './components/friendList/FriendList';
-import CreatePost from './components/createPost/CreatePost'
+import CreatePost from './components/createPost/CreatePost';
+import UserSearch from './components/userSearch/UserSearch';
 
 
 //GLOBAL CONTEXTS
@@ -37,6 +38,7 @@ function App() {
 
             <Route path='/' element={<UserProtectedRoute/>}>
               <Route path='/' element={[<Home/>]}></Route>
+              <Route path='UserSearch' element={<UserSearch/>}></Route>
               <Route path='Friends' element={[<FriendList/>]}></Route>
               <Route path='/NewPost' element={<CreatePost/>}></Route>
             </Route>
