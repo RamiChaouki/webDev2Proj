@@ -115,7 +115,7 @@ router.get('/Users', getUserCount, async(req,res,next)=>{  //testing line - orig
         const newValues = req.body;
         if (req.doesUserExist==='true'){
             user.update({ id: `${newValues.id}`, firstName: `${newValues.firstName}`, lastName: `${newValues.lastName}`, 
-            username: `${newValues.username}`, email: `${newValues.email}`, status: `${newValues.status}`, role: `${newValues.role}`}, {where: {id:`${id}`}});
+            username: `${newValues.username}`, email: `${newValues.email}`, dateOfBirth: `${newValues.dateOfBirth}`, status: `${newValues.status}`, role: `${newValues.role}`}, {where: {id:`${id}`}});
             const result = await user.findByPk(id);
             res.json(result);
         } else {

@@ -1,22 +1,19 @@
 import React from 'react'
-import { Create, SimpleForm, TextInput, DateField, SelectInput} from 'react-admin'
+import { Create, SimpleForm, TextInput, SelectInput, DateInput} from 'react-admin'
 
 
 
 const UserCreate = (props) => {
 
-
-
   return (
     <Create title='Create User' {...props}>
       <SimpleForm>
-        <TextInput disabled source='id' />
         <TextInput source='firstName' />
         <TextInput source='lastName' />
         <TextInput source='username' />
         <TextInput source='email' />
         <TextInput source='password' />
-        <DateField source='dateOfBirth' />
+        <DateInput source='dateOfBirth' />
         <SelectInput source="status" choices={[
             { id: 'active', name: 'Active' },
             { id: 'banned', name: 'Banned' },
