@@ -89,6 +89,8 @@ router.get(
   mergeFriendUserQuery,
   apiErrorHandler,
   (req,res)=>{
+  res.header("Access-Control-Expose-Headers","list-length")
+  res.header("list-length",req.listLength);
   res.status(201).json(req.mergeList);
 })
 

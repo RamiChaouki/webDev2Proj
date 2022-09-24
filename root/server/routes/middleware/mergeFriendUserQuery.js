@@ -25,6 +25,9 @@ function MergeFriendUserQuery(req,res,next){
     for(const [key,value] of usersMap){
         mergeList.push(value);
     }
+
+    //Calculates how many results are found (for pagination on the front end)
+    req.listLength=mergeList.length;
     
     //Pagination
     req.mergeList=mergeList.slice(offset,offset+limit)
