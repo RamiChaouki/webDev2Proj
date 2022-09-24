@@ -12,7 +12,8 @@ import CreatePost from './components/createPost/CreatePost'
 
 
 //GLOBAL CONTEXTS
-import {AuthProvider} from './context/AuthContext'
+import {AuthProvider} from './context/AuthContext';
+import {QueryProvider} from './context/QueryContext';
 import UserProtectedRoute from './components/UserProtectedRoute';
 import AdminProtectedRoute from './components/AdminProtectedRoute';
 
@@ -32,12 +33,13 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <AuthProvider>
+        <QueryProvider>
         <Nav/>
           <Routes>
 
             <Route path='/' element={<UserProtectedRoute/>}>
               <Route path='/' element={[<Home/>]}></Route>
-              <Route path='Friend' element={[<Nav/>,<FriendList/>]}></Route>
+              <Route path='Friends' element={[<FriendList/>]}></Route>
               <Route path='/NewPost' element={<CreatePost/>}></Route>
             </Route>
               <Route path='/Register' element={[<Registration/>]}></Route>
@@ -68,6 +70,7 @@ function App() {
               <Route path='/Login' element={<Login/>}></Route>*/}
               <Route path='/Logout' element={[<Home/>,<Logout/>]}></Route>
           </Routes>
+        </QueryProvider>
         </AuthProvider>
       </BrowserRouter>
       

@@ -10,6 +10,7 @@ export default function FriendList() {
     const [friends,setFriends]=useState([]);
     const [page,setPage]=useState(1);
     const [limit,setLimit]=useState(20);
+    const [updater,setUpdater]=useState(true);
 
     useEffect(()=>{
 
@@ -28,12 +29,12 @@ export default function FriendList() {
 
 
     },[])
-    console.log(friends);
+    // console.log(friends);
   return (
     <>
         <h1>You've got friends, but even this shall pass away...</h1>
         <div className='container flex-d'>
-            <FriendsCard friends={friends} loading={loading}/>
+            <FriendsCard friends={friends} setFriends={setFriends} loading={loading} updater={updater} setUpdater={setUpdater}/>
         </div>
     </>
   )

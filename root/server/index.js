@@ -43,11 +43,13 @@ const adminRouter = require('./routes/admin');
 app.use('/Admin',adminRouter);
 
 
-sequelize.sync({alter:true}).then(()=>{
+sequelize.sync().then(()=>{
     app.listen(process.env.S_PORT, ()=>{
         console.log("Listening on port "+process.env.S_PORT);
         //SEEDER
         // require('./seeders/userSeeder');
         // require('./seeders/friendSeeder')();
+        // require('./seeders/postSeeder');
+        // require('./seeders/commentSeeder');
     })
 });
