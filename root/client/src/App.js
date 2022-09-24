@@ -21,6 +21,8 @@ import * as React from "react";
 import {Admin, Resource} from 'react-admin';
 import RestProvider from 'ra-data-simple-rest';
 import UserList from './components/adminpanel/UserList';
+import UserEdit from './components/adminpanel/UserEdit';
+import UserCreate from './components/adminpanel/UserCreate';
 import MyAppBar from './components/adminpanel/MyAppBar';
 import MyLayout from './components/adminpanel/MyLayout';
 // import {UserCreate} from './components/adminpanel/UserCreate'
@@ -53,6 +55,8 @@ function App() {
                   <Resource 
                     name="Users"
                     list={UserList}
+                    edit={UserEdit}
+                    create={UserCreate}
                     options={{label: "Users"}}
                     />
                 </Admin>}>
