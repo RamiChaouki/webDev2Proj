@@ -30,6 +30,7 @@ router.get("/getFeed/", validateToken, async (req, res) => {
     },
   ],
     where: { userId: friendArray, type: "post" },
+    order:[['postDate','DESC']],
   }); //Needs to be reworked to add friends as well.
   res.json(posts);
 });
