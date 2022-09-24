@@ -1,15 +1,27 @@
-import React, { useEffect } from 'react'
+import React, { useEffect,useState } from 'react'
 import {Link} from 'react-router-dom'
 import './Nav.css'
 import {useAuth} from '../../context/AuthContext' //returns a function, that when run returns this object:{authState,setAuthState,GetAuth}
+import {useQuery} from '../../context/QueryContext';
 
 function Nav() {
   const useAuthState=useAuth().authState;
   const getAuth=useAuth().GetAuth;
+  const useQueryState=useQuery().query;
+  const setQueryState=useQuery().setQuery;
 
-    useEffect(()=>{
-        getAuth();
-    },[])
+useEffect(()=>{
+    getAuth();
+},[])
+
+function handleChange(e){
+    setQueryState(e.target.value);
+    console.log(useQueryState);
+}
+
+function search(e){
+    
+}
 
   if(useAuthState.id===0){
     return (
@@ -23,8 +35,8 @@ function Nav() {
   else if(useAuthState.role==='user'){
     return(
         <nav id='nav' className='navbar navbar-expand-lg navbar-dark bg-dark'>
-                <form id="search" className="form-inline my-2 my-lg-0">
-                    <input  id="search-input"className='form-control mr-sm-2' type='Search' placeholder='Find friends' aria-label='Search'/>
+                <form onSubmit={search} id="search" className="form-inline my-2 my-lg-0">
+                    <input value={useQueryState} onChange={handleChange} id="search-input"className='form-control mr-sm-2' type='Search' placeholder='Find friends' aria-label='Search'/>
                 </form>
                 <Link id='nav-home' to='/'>Abyss.SOCIAL</Link>
                 <Link id='user' to='/Feed'>welcome, {useAuthState.username}</Link>
