@@ -1,8 +1,5 @@
 const Posts = require("../models/post");
-const { sequelize } = require("../models/sequelizeConfig");
-const axios = require("axios");
 
-var results;
 let date = new Date();
 let dateString = date.toISOString();
 
