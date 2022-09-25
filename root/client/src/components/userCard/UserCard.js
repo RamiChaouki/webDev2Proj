@@ -58,7 +58,7 @@ const UsersCard=({users,setUsers,loading})=>{
                                 </div>
                                 <div className="col-4">
                                     <div className="row">
-                                       <Link to={{search:`?${user.id}`}} className='link' replace> 
+                                       <Link to={'/UserProfile/'+`${user.id}`} replace> 
                                             <h4>{user.firstName} {user.lastName}</h4>
                                         </Link>
                                     </div>

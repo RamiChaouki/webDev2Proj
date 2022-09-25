@@ -52,7 +52,7 @@ const FriendsCard=({friends,setFriends,loading,updater,setUpdater})=>{
                                 </div>
                                 <div className="col-4">
                                     <div className="row">
-                                       <Link to={{search:`?${friend.FriendID.id}`}} className='link' replace> 
+                                       <Link to={'/UserProfile/'+`${friend.FriendID.id}`} replaceclassName='link' replace> 
                                             <h4>{friend.FriendID.firstName} {friend.FriendID.lastName}</h4>
                                         </Link>
                                     </div>

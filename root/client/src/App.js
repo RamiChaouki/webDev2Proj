@@ -11,7 +11,7 @@ import FriendList from './components/friendList/FriendList';
 import CreatePost from './components/createPost/CreatePost';
 import UserSearch from './components/userSearch/UserSearch';
 import Feed from './components/feed/Feed';
-
+import UserProfile from './components/userProfile/UserProfile';
 
 //GLOBAL CONTEXTS
 import {AuthProvider} from './context/AuthContext';
@@ -28,6 +28,7 @@ import UserEdit from './components/adminpanel/UserEdit';
 import UserCreate from './components/adminpanel/UserCreate';
 import MyAppBar from './components/adminpanel/MyAppBar';
 import MyLayout from './components/adminpanel/MyLayout';
+
 // import {UserCreate} from './components/adminpanel/UserCreate'
 //${process.env.S_PORT}
 function App() {
@@ -45,6 +46,9 @@ function App() {
               <Route path='Friends' element={[<FriendList/>]}></Route>
               <Route path='/NewPost' element={<CreatePost/>}></Route>
               <Route path='/Feed' element={<Feed/>}></Route>
+              <Route path='UserProfile'>
+                  <Route path=':id' element={<UserProfile/>}></Route>
+              </Route>
             </Route>
               <Route path='/Register' element={[<Registration/>]}></Route>
               <Route path='/Login' element={[<Login/>]}></Route>
