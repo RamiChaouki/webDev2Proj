@@ -6,24 +6,23 @@ import {
   DateField,
   EditButton,
   DeleteButton,
-  Pagination,
+  EmailField
 } from 'react-admin'
 
-const UserPagination = props => <Pagination rowsPerPageOptions={[10, 25, 50, 100]} {...props} />;
+import UserPagination from './UserPagination'
 
 const UserList = (props) => {
   return (
-    <List {...props}  pagination={<UserPagination />} perPage={25}>
-      <Datagrid>
+    <List {...props} pagination={<UserPagination />} perPage={25}>
+      <Datagrid rowClick="edit">
         <TextField source='id' />
         <TextField source='firstName' />
         <TextField source='lastName' />
         <TextField source='username' />
-        <TextField source='email' />
+        <EmailField source='email' />
         <TextField source='status' />
         <TextField source='role' />
         <DateField source='dateOfBirth' />
-        <EditButton basepath='/Admin/User' />
         <DeleteButton basepath='/Admin/User' />
       </Datagrid>
     </List>

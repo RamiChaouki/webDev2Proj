@@ -2,6 +2,29 @@
 2. What I plan to do from this scrum to next? (next 24 hours)
 3. Where do I need assistance? What do I need to figure out?
 
+
+
+SUNDAY SEPTEMBER 25
+Rami
+1. What I have done / not done since last Scrum?
+I've made the search function work with pagination, added the edit profile and profile page
+2. What I plan to do from this scrum to next? (next 24 hours)
+get the route for editing to work, fix the protected routes
+3. Where do I need assistance? What do I need to figure out?
+
+Kyle
+1. What I have done / not done since last Scrum?
+Feed completed/ Post Page completed, and Comment component completed.
+2. What I plan to do from this scrum to next? (next 24 hours)
+Work on createComment to work on PostPage. Begin looking at webhosting solutions for our project. Begin working on parts of presentation.
+3. Where do I need assistance?
+
+Dmitry
+1. What I have done / not done since last Scrum?
+2. What I plan to do from this scrum to next? (next 24 hours)
+3. Where do I need assistance? What do I need to figure out?
+
+
 FRIDAY SEPTEMBER 23
 Kyle
 1. What I have done / not done since last Scrum?

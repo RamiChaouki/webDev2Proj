@@ -4,7 +4,7 @@
   border: none;
   display: block;
   margin: auto auto;
-  padding: 0.25rem 3rem;
+  padding: 0 5rem;
 }
 
 #btnLogout:hover {
