@@ -17,21 +17,25 @@ function nextPage(e){
   return (
     <div className='container'>
         <ul className='pagination d-inline-flex'>
-            {Array(paginationLength).fill(null).map((value,index)=>{
-            if(paginationLength==0){
-                return ( <li key={index} className='page-item'>
-                <Link data-page={index+1}onClick={nextPage}className="page-link">
-                    {index+1}
-                </Link>    
-            </li>)
-            }
-            else{
-               return( <li key={index} className='page-item'>
-                    <Link data-page={index+1}onClick={nextPage}className="page-link">
-                        {index+1}
+            
+            {
+            paginationLength===0
+            ?
+                <li key={0} className='page-item'>
+                    <Link data-page={1}onClick={nextPage}className="page-link">
+                        1
                     </Link>    
-                </li>)
-            }
+                </li>
+            
+            :
+            Array(paginationLength).fill(null).map((value,index)=>{
+                return ( 
+                    <li key={index} className='page-item'>
+                        <Link data-page={index+1}onClick={nextPage}className="page-link">
+                            {index+1}
+                        </Link>    
+                    </li>)
+            
             })}
         </ul>
 
@@ -43,7 +47,7 @@ function nextPage(e){
             <select id="inputState" onChange={changeLimit} className="form-control">
                 <option>2</option>
                 <option>5</option>
-                <option defaultValue>10</option>
+                <option selected>10</option>
             </select>
         </div>
 

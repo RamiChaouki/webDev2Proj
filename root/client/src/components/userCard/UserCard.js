@@ -47,8 +47,6 @@ const UsersCard=({users,setUsers,loading})=>{
                 setQuerySentState(useQuerySentState=>!useQuerySentState);
     }
 
-    console.log(users);
-
     
     return(
         users.map(user=>(
