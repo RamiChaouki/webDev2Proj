@@ -1,7 +1,8 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
-import {useAuth} from '../../context/AuthContext';
-
+import { useParams } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
+import Comment from '../comment/Comment';
 
 // export default class Post extends React.Component {
 //   state = {
@@ -61,38 +62,46 @@ import {useAuth} from '../../context/AuthContext';
 //     );
 //   }
 // }
-function Post(props){
-  const useAuthState=useAuth().authState;
+function Post(props) {
+  const useAuthState = useAuth().authState;
   // const getAuth=useAuth().GetAuth;
   const [post, setPost] = useState({});
   const [postUser, setPostUser] = useState({});
   const [comments, setComments] = useState([]);
+  const { id } = useParams();
 
-  useEffect(()=>{
-    const postR = axios.get("http://localhost:3001/Feed/getPost/1")
-    .then((response)=>{
-      setPost(response.data);
-      const postUserR = axios.get(
-        `http://localhost:3001/User/User/${response.data.userId}`
-      )
-      .then((response)=>{
-        setPostUser(response.data);
+  useEffect(() => {
+    const postR = axios
+      .get(`http://localhost:3001/Feed/getPost/${id}`)
+      .then((response) => {
+        setPost(response.data);
+        const postUserR = axios
+          .get(`http://localhost:3001/User/User/${response.data.userId}`)
+          .then((response) => {
+            setPostUser(response.data);
+          });
+        const commentsR = axios
+          .get(`http://localhost:3001/Feed/getComments/${post.id}`)
+          .then((response) => {
+            setComments(response.data);
+          });
       });
-      const commentsR = axios.get(
-        `http://localhost:3001/Feed/getComments/${post.id}`
-      ).then((response)=>{
-        setComments(response.data);
-      })
-    });
-  },[]);
+  }, []);
   return (
-    <div className="commentContainer">
-      <div className="postName">
-        <h1>{postUser.firstName + " " + postUser.lastName}</h1>
+    <div className="postPage">
+      <div className="post card">
+        <div className="postText">{post.postText}</div>
+        <div className="footer">
+          <div className="username">{postUser.username}</div>
+          <div className="postDate">{post.postDate}</div>
+        </div>
       </div>
-      <div className="postUsername">{postUser.username}</div>
-      <div className="postTextBody">{post.postText}</div>
-      <div className="postDate">{post.postDate}</div>
+      {posts.map((value, key) => {
+        return(
+          <div key={key} className="comment">
+            <Comment comment={value}/>
+          </div>
+        )})};
     </div>
   );
 }
