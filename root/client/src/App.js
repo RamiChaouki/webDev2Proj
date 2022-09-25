@@ -10,6 +10,7 @@ import Logout from './components/Logout';
 import FriendList from './components/friendList/FriendList';
 import CreatePost from './components/createPost/CreatePost';
 import UserSearch from './components/userSearch/UserSearch';
+import Feed from './components/feed/Feed';
 
 
 //GLOBAL CONTEXTS
@@ -23,6 +24,8 @@ import * as React from "react";
 import {Admin, Resource} from 'react-admin';
 import RestProvider from 'ra-data-simple-rest';
 import UserList from './components/adminpanel/UserList';
+import UserEdit from './components/adminpanel/UserEdit';
+import UserCreate from './components/adminpanel/UserCreate';
 import MyAppBar from './components/adminpanel/MyAppBar';
 import MyLayout from './components/adminpanel/MyLayout';
 // import {UserCreate} from './components/adminpanel/UserCreate'
@@ -41,6 +44,7 @@ function App() {
               <Route path='UserSearch' element={<UserSearch/>}></Route>
               <Route path='Friends' element={[<FriendList/>]}></Route>
               <Route path='/NewPost' element={<CreatePost/>}></Route>
+              <Route path='/Feed' element={<Feed/>}></Route>
             </Route>
               <Route path='/Register' element={[<Registration/>]}></Route>
               <Route path='/Login' element={[<Login/>]}></Route>
@@ -57,6 +61,8 @@ function App() {
                   <Resource 
                     name="Users"
                     list={UserList}
+                    edit={UserEdit}
+                    create={UserCreate}
                     options={{label: "Users"}}
                     />
                 </Admin>}>
