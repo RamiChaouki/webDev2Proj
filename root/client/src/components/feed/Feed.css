@@ -1,0 +1,11 @@
+.post{
+    margin: 2% 10%;
+}
+.footer{
+    border-top: 2px solid grey;
+    padding-left: 5%;
+}
+.postText{
+    font-size: 2rem;
+    padding: 2%;
+}

@@ -1,5 +1,5 @@
 import './App.css';
-import {BrowserRouter,Routes,Route} from 'react-router-dom';
+import {BrowserRouter,Routes,Route, useParams} from 'react-router-dom';
 
 //PAGES AND COMPONENTS
 import Registration from './components/registration/Registration';
@@ -12,6 +12,8 @@ import CreatePost from './components/createPost/CreatePost';
 import UserSearch from './components/userSearch/UserSearch';
 import Feed from './components/feed/Feed';
 import UserProfile from './components/userProfile/UserProfile';
+import Post from './components/posts/Post';
+
 
 //GLOBAL CONTEXTS
 import {AuthProvider} from './context/AuthContext';
@@ -49,6 +51,7 @@ function App() {
               <Route path='UserProfile'>
                   <Route path=':id' element={<UserProfile/>}></Route>
               </Route>
+              <Route path='/Post/:id' element={<Post/>}></Route>
             </Route>
               <Route path='/Register' element={[<Registration/>]}></Route>
               <Route path='/Login' element={[<Login/>]}></Route>
