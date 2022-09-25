@@ -10,9 +10,10 @@ export function useQuery(){
 export function QueryProvider({children}) {
     
     const [query,setQuery]=useState("");
+    const [querySent,setQuerySent]=useState(false);
     
     return (
-        <QueryContext.Provider value={{query,setQuery}}>
+        <QueryContext.Provider value={{query,setQuery,querySent,setQuerySent}}>
             {children}
         </QueryContext.Provider>
     )

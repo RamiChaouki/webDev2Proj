@@ -1,14 +1,21 @@
 import React, { useEffect,useState } from 'react'
-import {Link} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 import './Nav.css'
 import {useAuth} from '../../context/AuthContext' //returns a function, that when run returns this object:{authState,setAuthState,GetAuth}
 import {useQuery} from '../../context/QueryContext';
 
 function Nav() {
+//GLOBAL CONTEXTS
   const useAuthState=useAuth().authState;
   const getAuth=useAuth().GetAuth;
   const useQueryState=useQuery().query;
   const setQueryState=useQuery().setQuery;
+  const useQuerySentState=useQuery().querySent;
+  const setQuerySentState=useQuery().setQuerySent;
+  
+  
+  
+  const navigate=useNavigate();
 
 useEffect(()=>{
     getAuth();
@@ -16,11 +23,12 @@ useEffect(()=>{
 
 function handleChange(e){
     setQueryState(e.target.value);
-    console.log(useQueryState);
 }
 
 function search(e){
-    
+    e.preventDefault();//important to prevent default, otherwise browser refreshes and state is lost
+    setQuerySentState(useQuerySentState=>!useQuerySentState)//trips the useEffect in the UserSearch upon user pressing enter in the nav bar
+    navigate('/UserSearch')
 }
 
   if(useAuthState.id===0){
