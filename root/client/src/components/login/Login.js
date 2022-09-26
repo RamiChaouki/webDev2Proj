@@ -22,6 +22,10 @@ function Login() {
               setInvalidCredentials("Invalid Credentials. Please try again.")
             })
             .then((response)=>{
+              console.log(response);
+              if(response.data.auth.status == "banned"){
+                setInvalidCredentials("You are banned!")
+              }else{
               localStorage.setItem("token",response.data.token);
               
               setAuthState((prev)=>({
@@ -32,6 +36,7 @@ function Login() {
               }))
               if (response.data.auth.role === "user"){navigate('/');}
               else if (response.data.auth.role === "admin") {navigate('/Admin/Users');}
+            }
             })
   }
 

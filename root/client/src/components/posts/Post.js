@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import Comment from "../comment/Comment";
 import CreateComment from "../createComment/CreateComment";
@@ -65,17 +65,21 @@ import "./Post.css";
 //   }
 // }
 function Post(props) {
+  const navigate = useNavigate();
   const useAuthState = useAuth().authState;
   // const getAuth=useAuth().GetAuth;
   const [post, setPost] = useState({});
   const [postUser, setPostUser] = useState({});
   const [comments, setComments] = useState([]);
+  // const [queryError, setQueryError] = useState(false);
   const { id } = useParams();
 
   useEffect(() => {
     const postR = axios
       .get(`http://localhost:3001/Feed/getPost/${id}`,{
-        headers: { accessToken: localStorage.getItem("token") },})
+        headers: { accessToken: localStorage.getItem("token") },}).catch((err)=> {
+          navigate('/QueryError');
+        })
       .then((response) => {
         setPost(response.data);
         const postUserR = axios
