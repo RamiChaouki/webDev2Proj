@@ -94,4 +94,22 @@ router.get(
   res.status(201).json(req.mergeList);
 })
 
+//Updates Profile
+router.put('/UpdateProfile/:id([0-9]+)',JWTvalidation,apiErrorHandler,(req,res)=>{
+  try{
+    Users.update({
+                    firstName:req.body.firstName,
+                    lastName:req.body.lastName,
+                    username:req.body.username,
+                    email:req.body.email
+                  },
+                  {where:{id:req.params.id}
+
+                  })
+    res.status(201).json("User updated")
+  }catch(err){
+    res.sendStatus(500).json({Error: "Update failed"})
+  }
+})
+
 module.exports = router;

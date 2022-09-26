@@ -20,21 +20,19 @@ export function AuthProvider({children}){
 
 async function GetAuth(){
         if(localStorage.getItem('token')){
-           await axios
+           axios
                 .get('http://localhost:3001/Auth',
                     {headers:{
                                 accessToken:localStorage.getItem("token")
                             }
                     }
                 ).then((res)=>{
-                    ReactDOM.flushSync(()=>{setAuthState((prev)=>({
+                    setAuthState((prev)=>({
                                     ...prev,
                                     id:res.data.id,
                                     username:res.data.user,
                                     role:res.data.role
                                 }))
-                            })
-                                
                             })
                 .catch((error)=>{
                     console.log(error);
