@@ -22,14 +22,14 @@ function UserProfile() {
                                     
             setProfile(res.data);
             
-            if(auth.id===Number(id)){    
-                setMyProfile(profile=>!profile);
+            if(Number(auth.id)===Number(id)){    
+                setMyProfile(true);
             }
                                     
         }
 
         fetchProfile();
-    },[])
+    },[editMode])
 
     function calAge(DoB){
         return Math.floor((new Date() - new Date(DoB).getTime()) / 3.15576e+10)
