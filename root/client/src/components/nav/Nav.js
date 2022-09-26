@@ -1,8 +1,9 @@
-import React, { useEffect,useState } from 'react'
+import React, { useEffect,useRef } from 'react'
 import {Link, useNavigate} from 'react-router-dom'
 import './Nav.css'
 import {useAuth} from '../../context/AuthContext' //returns a function, that when run returns this object:{authState,setAuthState,GetAuth}
 import {useQuery} from '../../context/QueryContext';
+import axios from 'axios';
 
 function Nav() {
 //GLOBAL CONTEXTS
@@ -12,14 +13,27 @@ function Nav() {
   const setQueryState=useQuery().setQuery;
   const useQuerySentState=useQuery().querySent;
   const setQuerySentState=useQuery().setQuerySent;
+  const profilePic=useRef();
   
   
   
   const navigate=useNavigate();
 
 useEffect(()=>{
-    getAuth();
-},[])
+    const loadProfile=async()=>{
+        await getAuth()
+        .then(
+            axios
+                        .get(`http://localhost:3001/User/User/${useAuthState.id}`)
+                        .then(async (res)=>{
+                            profilePic.current=res.data.profile;
+                        })
+            
+        )
+        
+    }
+    loadProfile();
+},[useAuthState.id])
 
 function handleChange(e){
     setQueryState(e.target.value);
@@ -59,6 +73,9 @@ function search(e){
                         <li><Link className="dropdown-item" to='/Logout'>Logout</Link></li>
                     </ul>
                 </div>
+                <Link to={`UserProfile/${useAuthState.id}`}>
+                    <img id="profile-pic" src={profilePic.current} alt="Profile pic"></img>
+                </Link>
             </nav> 
     )}
     else if(useAuthState.role==='admin'){
