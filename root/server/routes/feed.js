@@ -13,7 +13,7 @@ const validatePostFields = require("./middleware/validatePostFields");
 const validateToken = require("./middleware/JWTvalidation");
 
 //TODO: Get a feed
-router.get("/getFeed/", validateToken, async (req, res) => {
+router.get("/getFeed/", validateToken,apiErrorHandler, async (req, res) => {
   const friends = await FriendStatus.findAll({
     attributes: ["friendId"],
     where: { userId: req.user.id, status: "Friends" },
@@ -36,7 +36,7 @@ router.get("/getFeed/", validateToken, async (req, res) => {
   res.json(posts);
 });
 //DONE: Get a single post
-router.get("/getPost/:id", apiErrorHandler, async (req, res) => {
+router.get("/getPost/:id", validateToken, apiErrorHandler, async (req, res) => {
   const id = req.params.id;
   const basicInfo = await Posts.findByPk(id);
 
