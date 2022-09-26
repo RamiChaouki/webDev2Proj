@@ -1,4 +1,4 @@
-import React, {useContext,useState} from 'react';
+import React, {useContext,useEffect,useMemo,useState} from 'react';
 import * as ReactDOM from 'react-dom';
 import axios from 'axios';
 
@@ -40,11 +40,49 @@ async function GetAuth(){
         }
 }
 
+//new code starts
 
-    
+const fetchAuth = async (accessToken) => {
+    const {
+      data: { id, user, role },
+    } = await axios.get("http://localhost:3001/Auth", {
+      headers: { accessToken },
+    });
+  
+    return { id, username: user, role };
+  };
+  
+  
+    // Loading state
+    const [isLoading, setIsLoading] = useState(false);
+  
+    // Helper memo
+    const isAuthenticated = useMemo(() => !!authState.username, [authState]);
+  
+    const getAuth = async () => {
+      setIsLoading(true);
+      const token = localStorage.getItem("token");
+      try {
+        if (token) {
+          setAuthState(await fetchAuth(token));
+        }
+      } catch (err) {
+        console.error(err.toJSON());
+      } finally {
+        setIsLoading(false);
+      }
+    };
+  
+    // Call getAuth on mount
+    useEffect(() => {
+      getAuth();
+    }, []);
+  
+
+//new code ends
 
     return(
-        <AuthContext.Provider value={{authState,setAuthState,GetAuth}}>
+        <AuthContext.Provider value={{authState,setAuthState,GetAuth,isAuthenticated,isLoading}}>
                 {children}
         </AuthContext.Provider>
     )
