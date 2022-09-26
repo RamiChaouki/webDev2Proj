@@ -36,11 +36,13 @@ router.get("/getFeed/", validateToken,apiErrorHandler, async (req, res) => {
   res.json(posts);
 });
 //DONE: Get a single post
-router.get("/getPost/:id", validateToken, apiErrorHandler, async (req, res) => {
+router.get("/getPost/:id([0-9]+)", validateToken, apiErrorHandler, async (req, res) => {
   const id = req.params.id;
   const basicInfo = await Posts.findByPk(id);
-
-  res.json(basicInfo.dataValues);
+  if(!basicInfo){
+    res.status(404).json()
+  }else{res.json(basicInfo.dataValues);}
+  
 });
 
 //TODO: Create a new post

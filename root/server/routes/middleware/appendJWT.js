@@ -16,7 +16,8 @@ function AppendJWT(req,res,next){
     req.auth={
                 user:req.body.account.dataValues.username,
                 id:req.body.account.dataValues.id,
-                role:req.body.account.dataValues.role
+                role:req.body.account.dataValues.role,
+                status: req.body.account.dataValues.status
             }
     next();
                         
