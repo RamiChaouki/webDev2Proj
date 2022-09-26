@@ -1,6 +1,11 @@
 .post{
     margin: 2% 10%;
 }
+.postFooter{
+    border-top: 2px solid grey;
+    border-bottom: 5px solid grey;
+    padding-left: 5%;
+}
 .footer{
     border-top: 2px solid grey;
     padding-left: 5%;
@@ -9,3 +14,11 @@
     font-size: 2rem;
     padding: 2%;
 }
+.commentBody{
+    font-size: 1.2rem;
+    padding: 2%;
+}
+/* .comment{
+    margin: 2% 10%;
+    
+} */

@@ -5,13 +5,19 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 
-function CreateComment(props) {
-
+function CreateComment({ onSubmit, parentId }) {
+  const navigate = useNavigate();
+  const useAuthState = useAuth().authState;
+  const getAuth = useAuth().GetAuth;
+  useEffect(() => {
+    getAuth();
+  }, []);
   const initialValues = {
     postText: "",
     type: "comment",
     postDate: new Date(),
     userId: useAuthState.id,
+    parentId: parentId,
   };
 
   const validationSchema = Yup.object().shape({
@@ -38,13 +44,13 @@ function CreateComment(props) {
 
           <div id="register-btn" className="row">
             <button className="btn btn-secondary" type="submit">
-              Send Post
+              Add a comment
             </button>
           </div>
         </Form>
       </Formik>
     </div>
-  )
+  );
 }
 
 export default CreateComment;

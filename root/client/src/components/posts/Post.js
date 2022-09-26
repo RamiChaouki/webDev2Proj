@@ -2,7 +2,9 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
-import Comment from '../comment/Comment';
+import Comment from "../comment/Comment";
+import CreateComment from "../createComment/CreateComment";
+import "./Post.css";
 
 // export default class Post extends React.Component {
 //   state = {
@@ -87,24 +89,55 @@ function Post(props) {
           });
       });
   }, []);
+
+  const onSubmit = (data) => {
+    const date = new Date();
+    data.date = date.toISOString();
+    // data.userId = useAuthState.id;
+    data.parentId = id;
+    axios
+      .post(`http://localhost:3001/Feed/addComment/${post.id}`, data, {
+        headers: { accessToken: localStorage.getItem("token") },
+      })
+      .then((res) => {
+        console.log(res);
+        const newComment = {
+          id: res.data.id,
+          postText: res.data.postText,
+          type: res.data.type,
+          postDate: res.data.postDate,
+          parentId: res.data.parentId,
+          userId: res.data.userId,
+          user: {
+            firstName: res.data.user.firstName,
+            lastName: res.data.user.lastName,
+            username: res.data.user.username,
+          },
+        };
+        setComments([...comments, newComment]);
+      });
+  };
   return (
     <div className="postPage">
       <div className="post card">
         <div className="postText">{post.postText}</div>
-        <div className="footer">
+        <div className="postFooter">
           <div className="username">{postUser.username}</div>
           <div className="postDate">{post.postDate}</div>
         </div>
-        <div className="addCommentComponent">
-          
-        </div>
       </div>
+      <div className="addCommentComponent card">
+        <CreateComment parentId={post.id} onSubmit={onSubmit} />
+      </div>
+      <h4 className="commentH4">Comments:</h4>
       {comments.map((value, key) => {
-        return(
+        return (
           <div key={key} className="comment">
-            <Comment comment={value}/>
+            <Comment comment={value} />
           </div>
-        )})};
+        );
+      })}
+      ;
     </div>
   );
 }

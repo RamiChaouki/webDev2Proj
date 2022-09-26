@@ -23,14 +23,15 @@ router.get("/getFeed/", validateToken, async (req, res) => {
     friendArray[i] = friends[i].friendId;
   }
   friendArray[friendArray.length] = req.user.id;
-  const posts = await Posts.findAll({include: [
-    {
-      model: Users,
-      attributes: ["username"],
-    },
-  ],
+  const posts = await Posts.findAll({
+    include: [
+      {
+        model: Users,
+        attributes: ["username"],
+      },
+    ],
     where: { userId: friendArray, type: "post" },
-    order:[['postDate','DESC']],
+    order: [["postDate", "DESC"]],
   }); //Needs to be reworked to add friends as well.
   res.json(posts);
 });
@@ -57,7 +58,7 @@ router.post(
 );
 
 // Get the comments of a post
-router.get("/getComments/:postId", async (req, res) => {
+router.get("/getComments/:postId([0-9]+)", validateToken, apiErrorHandler, async (req, res) => {
   const postId = req.params.postId;
   const commentList = await Posts.findAll(
     {
@@ -79,20 +80,39 @@ router.get("/getComments/:postId", async (req, res) => {
 
 //TODO: POST FEED/COMMENT/:postId
 router.post(
-  "/addComment/:postId",
+  "/addComment/:postId([0-9]+)",
+  validateToken,
   validatePostFields,
   apiErrorHandler,
   async (req, res) => {
     const post = req.body;
-    post.userId = 1; //For testing purposes
-    post.postId = req.params.postId;
+    // post.userId = 1;
+    // post.postId = req.params.postId;
     await Posts.create(post);
-    res.json(post);
+    const commentAdded = await Posts.findOne(
+      {
+        include: [
+          {
+            model: Users,
+            attributes: ["firstName", "LastName", "username"],
+          },
+        ],
+        where: {
+          parentId: req.body.parentId,
+          type: "comment",
+          userId: req.user.id,
+          postDate: req.body.postDate,
+        },
+      },
+      {}
+    );
+    console.log(commentAdded);
+    res.json(commentAdded);
   }
 );
 
 // Delete a post/comment
-router.delete("/delete/:postId", async (req, res) => {
+router.delete("/delete/:postId([0-9]+)", validateToken, apiErrorHandler, async (req, res) => {
   const postId = req.params.postId;
   await Posts.destroy({
     where: {
