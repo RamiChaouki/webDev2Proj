@@ -43,6 +43,7 @@ function App() {
           <Routes>
 
             <Route path='/' element={<UserProtectedRoute/>}>
+              
               <Route path='/' element={[<Home/>]}></Route>
               <Route path='UserSearch' element={<UserSearch/>}></Route>
               <Route path='Friends' element={[<FriendList/>]}></Route>

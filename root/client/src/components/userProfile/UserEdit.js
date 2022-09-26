@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useParams} from 'react-router-dom';
 import axios from 'axios';
 import * as Yup from 'yup';
 import {Formik, Form, Field,ErrorMessage} from 'formik'
@@ -11,8 +12,11 @@ function UserEdit(profile){
     const [usernameTaken,setUsernameTaken]=useState("");
     const [emailTaken,setEmailTaken]=useState("");
 
+    const {id}=useParams();
 
-    const onSubmit=(data)=>{axios.put('http://localhost:3001/User/UpdateProfile',data)
+    const onSubmit=(data)=>{axios.put(`http://localhost:3001/User/UpdateProfile/${id}`,data,
+    {headers:
+    {accessToken:localStorage.getItem("token")}})
     .catch((error)=>{
         //reset previous errors
         setEmailTaken("");

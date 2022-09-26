@@ -20,7 +20,7 @@ export default function UserProtectedRoute(){
 
     },[]);
 
-    if(authorized){
+    if(authorized.current){
         return <Outlet/>;
     }
     else{
