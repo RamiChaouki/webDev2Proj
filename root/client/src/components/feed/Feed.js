@@ -28,13 +28,13 @@ function Feed() {
             key={key}
             className="post card"
             onClick={() => {
-              navigate(`/post/${value.id}`);
+              navigate(`/Post/${value.id}`);
             }}
           >
             <div
               className="postText"
               onClick={() => {
-                navigate(`/post/${value.id}`);
+                navigate(`/Post/${value.id}`);
               }}
             >
               {value.postText}

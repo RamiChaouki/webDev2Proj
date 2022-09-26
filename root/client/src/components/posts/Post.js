@@ -81,7 +81,7 @@ function Post(props) {
             setPostUser(response.data);
           });
         const commentsR = axios
-          .get(`http://localhost:3001/Feed/getComments/${post.id}`)
+          .get(`http://localhost:3001/Feed/getComments/${response.data.id}`)
           .then((response) => {
             setComments(response.data);
           });
@@ -95,8 +95,11 @@ function Post(props) {
           <div className="username">{postUser.username}</div>
           <div className="postDate">{post.postDate}</div>
         </div>
+        <div className="addCommentComponent">
+          
+        </div>
       </div>
-      {posts.map((value, key) => {
+      {comments.map((value, key) => {
         return(
           <div key={key} className="comment">
             <Comment comment={value}/>

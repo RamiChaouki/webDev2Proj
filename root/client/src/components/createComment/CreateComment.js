@@ -1,6 +1,22 @@
-import React from 'react'
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import * as Yup from "yup";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 
 function CreateComment(props) {
+
+  const initialValues = {
+    postText: "",
+    type: "comment",
+    postDate: new Date(),
+    userId: useAuthState.id,
+  };
+
+  const validationSchema = Yup.object().shape({
+    postText: Yup.string().required("Please type in your comment."),
+  });
   return (
     <div className="container">
       <Formik
