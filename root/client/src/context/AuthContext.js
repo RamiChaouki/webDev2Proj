@@ -57,7 +57,7 @@ const fetchAuth = async (accessToken) => {
     const [isLoading, setIsLoading] = useState(false);
   
     // Helper memo
-    const isAuthenticated = useMemo(() => !!authState.username, [authState]);
+    const role = useMemo(() => authState.role, [authState]);
   
     const getAuth = async () => {
       setIsLoading(true);
@@ -82,7 +82,7 @@ const fetchAuth = async (accessToken) => {
 //new code ends
 
     return(
-        <AuthContext.Provider value={{authState,setAuthState,GetAuth,isAuthenticated,isLoading}}>
+        <AuthContext.Provider value={{authState,setAuthState,GetAuth,role,isLoading}}>
                 {children}
         </AuthContext.Provider>
     )
