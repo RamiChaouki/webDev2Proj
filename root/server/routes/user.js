@@ -20,6 +20,7 @@ const searchFriends=require("./middleware/searchFriends");
 const searchUsers=require("./middleware/searchUsers");
 const JWTvalidation=require("./middleware/JWTvalidation");
 const mergeFriendUserQuery = require("./middleware/mergeFriendUserQuery");
+const AppendJWTUpdate = require("./middleware/appendJWTUpdate");
 
 //TODO:
 /**
@@ -95,7 +96,7 @@ router.get(
 })
 
 //Updates Profile
-router.put('/UpdateProfile/:id([0-9]+)',JWTvalidation,apiErrorHandler,(req,res)=>{
+router.put('/UpdateProfile/:id([0-9]+)',JWTvalidation,AppendJWTUpdate,apiErrorHandler,(req,res)=>{
   try{
     Users.update({
                     firstName:req.body.firstName,
@@ -106,7 +107,14 @@ router.put('/UpdateProfile/:id([0-9]+)',JWTvalidation,apiErrorHandler,(req,res)=
                   {where:{id:req.params.id}
 
                   })
-    res.status(201).json("User updated")
+    res.status(201).json({auth:{
+                                firstName:req.body.firstName,
+                                lastName:req.body.lastName,
+                                username:req.body.username,
+                                email:req.body.email
+                                },
+                          token:req.token
+  })
   }catch(err){
     res.sendStatus(500).json({Error: "Update failed"})
   }

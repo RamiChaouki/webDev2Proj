@@ -1,18 +1,23 @@
 import React, { useState } from 'react';
-import { useParams} from 'react-router-dom';
+import { useNavigate, useParams} from 'react-router-dom';
 import axios from 'axios';
 import * as Yup from 'yup';
 import {Formik, Form, Field,ErrorMessage} from 'formik'
 import './UserEdit.css';
+import {useAuth} from '../../context/AuthContext'
 
 //React runs ES6 --> import/export
 //Node runs commonJS --> require/ exports.modules
 
-function UserEdit(profile){
+function UserEdit({profile,setMode}){
     const [usernameTaken,setUsernameTaken]=useState("");
     const [emailTaken,setEmailTaken]=useState("");
 
     const {id}=useParams();
+    const navigate=useNavigate();
+    const setAuthState=useAuth().setAuthState;
+    const useAuthState=useAuth().authState;
+
 
     const onSubmit=(data)=>{axios.put(`http://localhost:3001/User/UpdateProfile/${id}`,data,
     {headers:
@@ -35,13 +40,22 @@ function UserEdit(profile){
        }
     })
     .then((res)=>{
+        localStorage.setItem("token",res.data.token);
+        setAuthState((prev)=>({
+            ...prev,
+            id:useAuthState.id,
+            username:res.data.auth.username,
+            role:useAuthState.role
+          }))
+        setMode((mode)=>!mode)
+        navigate(`/UserProfile/${id}`);
         
     }) }
     const initialValues ={
-        firstName:profile.profile.firstName,
-        lastName:profile.profile.lastName,
-        username:profile.profile.username,
-        email:profile.profile.email,
+        firstName:profile.firstName,
+        lastName:profile.lastName,
+        username:profile.username,
+        email:profile.email,
             };
 
 

@@ -51,7 +51,7 @@ function UserProfile() {
                     
             )
         }else if(editMode){
-            return <UserEdit profile={profile}/>
+            return <UserEdit profile={profile} setMode={setEditMode}/>
         }else{
             return(
             <div className='container d-flex flex-column justify-content-center'>
