@@ -76,10 +76,12 @@ function Post(props) {
 
   useEffect(() => {
     const postR = axios
-      .get(`http://localhost:3001/Feed/getPost/${id}`,{
-        headers: { accessToken: localStorage.getItem("token") },}).catch((err)=> {
-          navigate('/QueryError');
-        })
+      .get(`http://localhost:3001/Feed/getPost/${id}`, {
+        headers: { accessToken: localStorage.getItem("token") },
+      })
+      .catch((err) => {
+        navigate("/QueryError");
+      })
       .then((response) => {
         setPost(response.data);
         const postUserR = axios
@@ -88,8 +90,9 @@ function Post(props) {
             setPostUser(response.data);
           });
         const commentsR = axios
-          .get(`http://localhost:3001/Feed/getComments/${response.data.id}`,{
-            headers: { accessToken: localStorage.getItem("token") },})
+          .get(`http://localhost:3001/Feed/getComments/${response.data.id}`, {
+            headers: { accessToken: localStorage.getItem("token") },
+          })
           .then((response) => {
             setComments(response.data);
           });
@@ -128,8 +131,9 @@ function Post(props) {
       <div className="post card">
         <div className="postText">{post.postText}</div>
         <div className="postFooter">
-          <div className="username">{postUser.username}</div>
-          <div className="postDate">{post.postDate}</div>
+          <img src={postUser.profile} className="postPic"></img>
+          <div className="username">from: {postUser.username}</div>
+          <div className="postDate">date: {post.postDate}</div>
         </div>
       </div>
       <div className="addCommentComponent card">

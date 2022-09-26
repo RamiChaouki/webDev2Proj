@@ -27,7 +27,7 @@ router.get("/getFeed/", validateToken,apiErrorHandler, async (req, res) => {
     include: [
       {
         model: Users,
-        attributes: ["username"],
+        attributes: ["username","profile"],
       },
     ],
     where: { userId: friendArray, type: "post" },
@@ -67,7 +67,7 @@ router.get("/getComments/:postId([0-9]+)", validateToken, apiErrorHandler, async
       include: [
         {
           model: Users,
-          attributes: ["firstName", "LastName", "username"],
+          attributes: ["firstName", "LastName", "username", "profile"],
         },
       ],
       where: {
@@ -96,7 +96,7 @@ router.post(
         include: [
           {
             model: Users,
-            attributes: ["firstName", "LastName", "username"],
+            attributes: ["firstName", "LastName", "username", "profile"],
           },
         ],
         where: {
