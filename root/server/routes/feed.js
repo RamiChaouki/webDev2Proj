@@ -58,7 +58,7 @@ router.post(
 );
 
 // Get the comments of a post
-router.get("/getComments/:postId", async (req, res) => {
+router.get("/getComments/:postId([0-9]+)", validateToken, apiErrorHandler, async (req, res) => {
   const postId = req.params.postId;
   const commentList = await Posts.findAll(
     {
@@ -80,7 +80,7 @@ router.get("/getComments/:postId", async (req, res) => {
 
 //TODO: POST FEED/COMMENT/:postId
 router.post(
-  "/addComment/:postId",
+  "/addComment/:postId([0-9]+)",
   validateToken,
   validatePostFields,
   apiErrorHandler,
@@ -112,7 +112,7 @@ router.post(
 );
 
 // Delete a post/comment
-router.delete("/delete/:postId", async (req, res) => {
+router.delete("/delete/:postId([0-9]+)", validateToken, apiErrorHandler, async (req, res) => {
   const postId = req.params.postId;
   await Posts.destroy({
     where: {

@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import Comment from "../comment/Comment";
 import CreateComment from "../createComment/CreateComment";
-import './Post.css'
+import "./Post.css";
 
 // export default class Post extends React.Component {
 //   state = {
@@ -125,9 +125,9 @@ function Post(props) {
           <div className="username">{postUser.username}</div>
           <div className="postDate">{post.postDate}</div>
         </div>
-        <div className="addCommentComponent">
-          <CreateComment parentId={post.id} onSubmit={onSubmit} />
-        </div>
+      </div>
+      <div className="addCommentComponent card">
+        <CreateComment parentId={post.id} onSubmit={onSubmit} />
       </div>
       <h4 className="commentH4">Comments:</h4>
       {comments.map((value, key) => {
