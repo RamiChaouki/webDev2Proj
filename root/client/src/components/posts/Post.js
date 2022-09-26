@@ -74,7 +74,8 @@ function Post(props) {
 
   useEffect(() => {
     const postR = axios
-      .get(`http://localhost:3001/Feed/getPost/${id}`)
+      .get(`http://localhost:3001/Feed/getPost/${id}`,{
+        headers: { accessToken: localStorage.getItem("token") },})
       .then((response) => {
         setPost(response.data);
         const postUserR = axios
@@ -83,7 +84,8 @@ function Post(props) {
             setPostUser(response.data);
           });
         const commentsR = axios
-          .get(`http://localhost:3001/Feed/getComments/${response.data.id}`)
+          .get(`http://localhost:3001/Feed/getComments/${response.data.id}`,{
+            headers: { accessToken: localStorage.getItem("token") },})
           .then((response) => {
             setComments(response.data);
           });
