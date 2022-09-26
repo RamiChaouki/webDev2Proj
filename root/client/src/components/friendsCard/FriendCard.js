@@ -43,9 +43,9 @@ const FriendsCard=({friends,setFriends,loading,updater,setUpdater})=>{
 
     
     return(
-        friends.map(friend=>(
+        friends.map((friend,key)=>(
                         
-                            <div key={friend.FriendID.username} id="friend-card" className="container d-inline-flex text-white bg-dark">
+                            <div key={key} id="friend-card" className="container d-inline-flex text-white bg-dark">
                             
                                 <div className="col-4">
                                     <img id="profile-pic" src="https://picsum.photos/50" alt="Profile"></img>
