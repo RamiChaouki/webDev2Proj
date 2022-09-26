@@ -5,6 +5,7 @@ import * as Yup from 'yup';
 import {Formik, Form, Field,ErrorMessage} from 'formik'
 import './UserEdit.css';
 import {useAuth} from '../../context/AuthContext'
+import UploadPicture from './UploadPicture';
 
 //React runs ES6 --> import/export
 //Node runs commonJS --> require/ exports.modules
@@ -135,6 +136,7 @@ function UserEdit({profile,setMode}){
                 </div>
             </Form>
         </Formik>
+        <UploadPicture/>
     </div>
     )
 }

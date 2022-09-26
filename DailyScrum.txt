@@ -21,9 +21,11 @@ Work on createComment to work on PostPage. Begin looking at webhosting solutions
 
 Dmitry
 1. What I have done / not done since last Scrum?
+futile attempts of getting pagination and admin authorizations to work / pagination multi-parameter queries and admin authorizations
 2. What I plan to do from this scrum to next? (next 24 hours)
+admin authorizations and, if time permits, pagination queries, css to make it look tolerable and testing
 3. Where do I need assistance? What do I need to figure out?
-
+might have questions on authorizations
 
 FRIDAY SEPTEMBER 23
 Kyle

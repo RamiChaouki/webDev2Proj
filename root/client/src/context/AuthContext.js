@@ -15,7 +15,7 @@ export function AuthProvider({children}){
     const [authState,setAuthState]=useState({
                                                 id:0,
                                                 username:"",
-                                                role:"user"
+                                                role:""
                                             });
 
 async function GetAuth(){
