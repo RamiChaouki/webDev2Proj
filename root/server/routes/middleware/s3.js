@@ -29,6 +29,7 @@ async function generateUploadURL(){
     const rawBytes= await randomBytes(16);
     const imageName=rawBytes.toString('hex');
 
+    console.log(imageName);
     const params=({
         Bucket:bucketName,
         Key:imageName,

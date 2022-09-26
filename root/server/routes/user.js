@@ -120,4 +120,20 @@ router.put('/UpdateProfile/:id([0-9]+)',JWTvalidation,AppendJWTUpdate,apiErrorHa
   }
 })
 
+
+//Updates Profile Pic
+router.put('/UpdateProfilePic/',JWTvalidation,apiErrorHandler,(req,res)=>{
+  try{
+    Users.update({
+                    profile:req.body.profile
+                  },
+                  {where:{id:req.user.id}
+
+                  })
+    res.status(201).json({Success:"Profile picture updated"})
+  }catch(err){
+    res.sendStatus(500).json({Error: "Update failed"})
+  }
+})  
+
 module.exports = router;

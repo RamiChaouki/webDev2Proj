@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import axios from 'axios'
 
-function UploadPicture() {
+function UploadPicture({setMode}) {
 
     const [selectedFile,setSelectedFile]=useState();
     const [isFilePicked,setIsFilePicked]=useState(false);
@@ -33,11 +33,21 @@ function UploadPicture() {
                             }}
                         )
                 const imageUrl = url.split('?')[0]
-                const img = document.createElement("img")
-                img.src = imageUrl
-                document.body.appendChild(img)
+                return imageUrl
             })
-      
+            .then(async (imgUrl)=>{
+                await axios
+                    .put("http://localhost:3001/User/UpdateProfilePic",
+                        {"profile":imgUrl},
+                        {headers:{accessToken:localStorage.getItem("token")}})
+            })
+            .then(()=>{
+                setMode(mode=>!mode);
+            })
+                //       console.log(imageUrl);
+                // const img = document.createElement("img")
+                // img.src = imageUrl
+                // document.body.appendChild(img)
       
         // const imageUrl = url.split('?')[0]
         // console.log(imageUrl)
@@ -52,7 +62,7 @@ function UploadPicture() {
     <div>
         <input name="file" type="file" accept="image/*" onChange={changeHandler}/>
         <button onClick={UploadImg} type="submit">Upload</button>
-        <img src="https://user-profile-pic-bucket.s3.amazonaws.com/95293c0ff9880413cd1c2674dc5d312e" alt="test"></img>
+        {/* <img src="https://user-profile-pic-bucket.s3.amazonaws.com/3aed2a7f20ec3f7ff66ef1f0c1081547" alt="test"></img> */}
     </div>
   )
 }

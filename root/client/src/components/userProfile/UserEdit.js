@@ -136,7 +136,7 @@ function UserEdit({profile,setMode}){
                 </div>
             </Form>
         </Formik>
-        <UploadPicture/>
+        <UploadPicture setMode={setMode}/>
     </div>
     )
 }

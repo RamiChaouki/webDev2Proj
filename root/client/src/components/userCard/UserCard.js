@@ -54,7 +54,7 @@ const UsersCard=({users,setUsers,loading})=>{
                             <div key={user.username} id="friend-card" className="container d-inline-flex text-white bg-dark">
                             
                                 <div className="col-4">
-                                    <img id="profile-pic" src="https://picsum.photos/50" alt="Profile"></img>
+                                    <img id="profile-pic" src={user.profile} alt="Profile"></img>
                                 </div>
                                 <div className="col-4">
                                     <div className="row">

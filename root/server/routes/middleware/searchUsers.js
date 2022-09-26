@@ -8,7 +8,7 @@ async function SearchUsers(req,res,next){
         for(queryItem of queryArray){
             let tempList=
             await sequelize.query(
-                "Select firstName, lastName,username,id from users where (firstName like :query or username like :query or lastName like :query)",
+                "Select firstName, lastName,username,id,profile from users where (firstName like :query or username like :query or lastName like :query)",
                 {
                     replacements:{
                                 query:queryItem+'%' 
