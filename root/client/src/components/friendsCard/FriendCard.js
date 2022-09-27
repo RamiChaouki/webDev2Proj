@@ -48,7 +48,7 @@ const FriendsCard=({friends,setFriends,loading,updater,setUpdater})=>{
                             <div key={key} id="friend-card" className="container d-inline-flex text-white bg-dark">
                             
                                 <div className="col-4">
-                                    <img id="profile-pic" src="https://picsum.photos/50" alt="Profile"></img>
+                                    <img id="profile-pic" src={friend.FriendID.profile} alt="Profile"></img>
                                 </div>
                                 <div className="col-4">
                                     <div className="row">
