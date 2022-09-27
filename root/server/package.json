@@ -4,7 +4,8 @@
   "description": "Social Media Project for Web Development 2",
   "main": "index.js",
   "scripts": {
-    "devStart": "nodemon index.js"
+    "devStart": "nodemon index.js",
+    "start": "node index.js"
   },
   "author": "Dmitry Kizyakov, Kyle Piché，Rami Chaouki",
   "license": "ISC",
