@@ -67,6 +67,7 @@ function search(e){
                     </button>
                     <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                         <li><Link className="dropdown-item" to="/Feed">Feed</Link></li>
+                        <li><Link className="dropdown-item" to="/Friends">Friends</Link></li>
                         <li><Link className='dropdown-item' to='/NewPost'>Create a new Post</Link></li>
                         <li><Link className="dropdown-item" to={`UserProfile/${useAuthState.id}`}>Edit Profile</Link></li>
                         <div className="dropdown-divider"></div>
