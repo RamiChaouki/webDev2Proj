@@ -27,7 +27,7 @@ function CreatePost() {
       .then((res) => {
         console.log("Post sent successfully");
         console.log(res);
-        navigate("/");
+        navigate("/Feed");
       });
   };
   const initialValues = {
