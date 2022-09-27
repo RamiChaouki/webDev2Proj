@@ -21,7 +21,7 @@ function CreatePost() {
     data.date = date.toISOString();
     data.userId = useAuthState.id;
     axios
-      .post("http://localhost:3001/Feed/newPost", data, {
+      .post(`${process.env.REACT_APP_API_HOST}/Feed/newPost`, data, {
         headers: { accessToken: localStorage.getItem("token") },
       })
       .then((res) => {

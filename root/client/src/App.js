@@ -13,6 +13,7 @@ import UserSearch from './components/userSearch/UserSearch';
 import Feed from './components/feed/Feed';
 import UserProfile from './components/userProfile/UserProfile';
 import Post from './components/posts/Post';
+import Space404 from 'react-space-404';
 
 
 //GLOBAL CONTEXTS
@@ -62,7 +63,7 @@ function App() {
               <Route path='/Admin/*' element={      
                 <Admin layout={MyLayout}
                   basename="/Admin"
-                  dataProvider={RestProvider(`http://localhost:3001/Admin`)}
+                  dataProvider={RestProvider(`${process.env.REACT_APP_API_HOST}/Admin`)}
                   // authProvider={AuthProvider}
                   >
                   
@@ -77,6 +78,8 @@ function App() {
               </Route>
             </Route>
               <Route path='/Logout' element={[<Home/>,<Logout/>]}></Route>
+              <Route path='*' element={<Space404 countdown={20} href="/"/>}></Route>
+
           </Routes>
         </QueryProvider>
         </AuthProvider>

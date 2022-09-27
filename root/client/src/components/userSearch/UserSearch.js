@@ -19,11 +19,13 @@ function UserSearch() {
     const listLength=useRef(0);
     const [paginationLength,setPaginationLength]=useState(1);
 
+    const LSQuery=useMemo(()=>{if(useQueryState!==""){localStorage.setItem("query",useQueryState)}},[useQueryState])
+
     useMemo(()=>{
 
         const fetchUsers= async()=>{
             setLoading(true);
-            const res= await axios.get(`http://localhost:3001/User/Search/${limit}/${page}/${useQueryState}`,
+            const res= await axios.get(`${process.env.REACT_APP_API_HOST}/User/Search/${limit}/${page}/${localStorage.getItem("query")}`,
                                         {headers:{
                                             accessToken:localStorage.getItem("token")
                                                 }

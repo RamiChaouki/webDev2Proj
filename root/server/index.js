@@ -30,6 +30,10 @@ app.use('/Auth',authRouter);
 const userRouter = require('./routes/user');
 app.use('/User',userRouter);
 
+//S3 bucket router
+const s3Router= require('./routes/s3')
+app.use('/s3Url',s3Router)
+
 //Feed router
 const feedRouter = require('./routes/feed');
 app.use('/Feed',feedRouter);
@@ -43,7 +47,7 @@ const adminRouter = require('./routes/admin');
 app.use('/Admin',adminRouter);
 
 
-sequelize.sync().then(()=>{
+sequelize.sync({alter:true}).then(()=>{
     app.listen(process.env.S_PORT, ()=>{
         console.log("Listening on port "+process.env.S_PORT);
         //SEEDER

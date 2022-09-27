@@ -1,8 +1,10 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
-import Comment from '../comment/Comment';
+import Comment from "../comment/Comment";
+import CreateComment from "../createComment/CreateComment";
+import "./Post.css";
 
 // export default class Post extends React.Component {
 //   state = {
@@ -63,48 +65,89 @@ import Comment from '../comment/Comment';
 //   }
 // }
 function Post(props) {
+  const navigate = useNavigate();
   const useAuthState = useAuth().authState;
   // const getAuth=useAuth().GetAuth;
   const [post, setPost] = useState({});
   const [postUser, setPostUser] = useState({});
   const [comments, setComments] = useState([]);
+  // const [queryError, setQueryError] = useState(false);
   const { id } = useParams();
 
   useEffect(() => {
-    const postR = axios
-      .get(`http://localhost:3001/Feed/getPost/${id}`)
+    axios
+      .get(`${process.env.REACT_APP_API_HOST}/Feed/getPost/${id}`, {
+        headers: { accessToken: localStorage.getItem("token") },
+      })
+      .catch((err) => {
+        navigate("/QueryError");
+      })
       .then((response) => {
         setPost(response.data);
-        const postUserR = axios
-          .get(`http://localhost:3001/User/User/${response.data.userId}`)
+        axios
+          .get(`${process.env.REACT_APP_API_HOST}/User/User/${response.data.userId}`)
           .then((response) => {
             setPostUser(response.data);
           });
-        const commentsR = axios
-          .get(`http://localhost:3001/Feed/getComments/${response.data.id}`)
+        axios
+          .get(`${process.env.REACT_APP_API_HOST}/Feed/getComments/${response.data.id}`, {
+            headers: { accessToken: localStorage.getItem("token") },
+          })
           .then((response) => {
             setComments(response.data);
           });
       });
   }, []);
+
+  const onSubmit = (data) => {
+    const date = new Date();
+    data.date = date.toISOString();
+    // data.userId = useAuthState.id;
+    data.parentId = id;
+    axios
+      .post(`${process.env.REACT_APP_API_HOST}/Feed/addComment/${post.id}`, data, {
+        headers: { accessToken: localStorage.getItem("token") },
+      })
+      .then((res) => {
+        console.log(res);
+        const newComment = {
+          id: res.data.id,
+          postText: res.data.postText,
+          type: res.data.type,
+          postDate: res.data.postDate,
+          parentId: res.data.parentId,
+          userId: res.data.userId,
+          user: {
+            firstName: res.data.user.firstName,
+            lastName: res.data.user.lastName,
+            username: res.data.user.username,
+          },
+        };
+        setComments([...comments, newComment]);
+      });
+  };
   return (
     <div className="postPage">
       <div className="post card">
         <div className="postText">{post.postText}</div>
-        <div className="footer">
-          <div className="username">{postUser.username}</div>
-          <div className="postDate">{post.postDate}</div>
-        </div>
-        <div className="addCommentComponent">
-          
+        <div className="postFooter">
+          <img src={postUser.profile} className="postPic"></img>
+          <div className="username">from: {postUser.username}</div>
+          <div className="postDate">date: {post.postDate}</div>
         </div>
       </div>
+      <div className="addCommentComponent card">
+        <CreateComment parentId={post.id} onSubmit={onSubmit} />
+      </div>
+      <h4 className="commentH4">Comments:</h4>
       {comments.map((value, key) => {
-        return(
+        return (
           <div key={key} className="comment">
-            <Comment comment={value}/>
+            <Comment comment={value} />
           </div>
-        )})};
+        );
+      })}
+      ;
     </div>
   );
 }

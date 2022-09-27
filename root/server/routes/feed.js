@@ -13,7 +13,7 @@ const validatePostFields = require("./middleware/validatePostFields");
 const validateToken = require("./middleware/JWTvalidation");
 
 //TODO: Get a feed
-router.get("/getFeed/", validateToken, async (req, res) => {
+router.get("/getFeed/", validateToken,apiErrorHandler, async (req, res) => {
   const friends = await FriendStatus.findAll({
     attributes: ["friendId"],
     where: { userId: req.user.id, status: "Friends" },
@@ -23,23 +23,26 @@ router.get("/getFeed/", validateToken, async (req, res) => {
     friendArray[i] = friends[i].friendId;
   }
   friendArray[friendArray.length] = req.user.id;
-  const posts = await Posts.findAll({include: [
-    {
-      model: Users,
-      attributes: ["username"],
-    },
-  ],
+  const posts = await Posts.findAll({
+    include: [
+      {
+        model: Users,
+        attributes: ["username","profile"],
+      },
+    ],
     where: { userId: friendArray, type: "post" },
-    order:[['postDate','DESC']],
+    order: [["postDate", "DESC"]],
   }); //Needs to be reworked to add friends as well.
   res.json(posts);
 });
 //DONE: Get a single post
-router.get("/getPost/:id", apiErrorHandler, async (req, res) => {
+router.get("/getPost/:id([0-9]+)", validateToken, apiErrorHandler, async (req, res) => {
   const id = req.params.id;
   const basicInfo = await Posts.findByPk(id);
-
-  res.json(basicInfo.dataValues);
+  if(!basicInfo){
+    res.status(404).json()
+  }else{res.json(basicInfo.dataValues);}
+  
 });
 
 //TODO: Create a new post
@@ -57,14 +60,14 @@ router.post(
 );
 
 // Get the comments of a post
-router.get("/getComments/:postId", async (req, res) => {
+router.get("/getComments/:postId([0-9]+)", validateToken, apiErrorHandler, async (req, res) => {
   const postId = req.params.postId;
   const commentList = await Posts.findAll(
     {
       include: [
         {
           model: Users,
-          attributes: ["firstName", "LastName", "username"],
+          attributes: ["firstName", "LastName", "username", "profile"],
         },
       ],
       where: {
@@ -79,20 +82,39 @@ router.get("/getComments/:postId", async (req, res) => {
 
 //TODO: POST FEED/COMMENT/:postId
 router.post(
-  "/addComment/:postId",
+  "/addComment/:postId([0-9]+)",
+  validateToken,
   validatePostFields,
   apiErrorHandler,
   async (req, res) => {
     const post = req.body;
-    post.userId = 1; //For testing purposes
-    post.postId = req.params.postId;
+    // post.userId = 1;
+    // post.postId = req.params.postId;
     await Posts.create(post);
-    res.json(post);
+    const commentAdded = await Posts.findOne(
+      {
+        include: [
+          {
+            model: Users,
+            attributes: ["firstName", "LastName", "username", "profile"],
+          },
+        ],
+        where: {
+          parentId: req.body.parentId,
+          type: "comment",
+          userId: req.user.id,
+          postDate: req.body.postDate,
+        },
+      },
+      {}
+    );
+    console.log(commentAdded);
+    res.json(commentAdded);
   }
 );
 
 // Delete a post/comment
-router.delete("/delete/:postId", async (req, res) => {
+router.delete("/delete/:postId([0-9]+)", validateToken, apiErrorHandler, async (req, res) => {
   const postId = req.params.postId;
   await Posts.destroy({
     where: {

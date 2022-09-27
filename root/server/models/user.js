@@ -44,7 +44,12 @@ const user=sequelize.define('user',{
         type:Sequelize.DataTypes.ENUM("admin","user"), //User.getAttributes().role.values
         allowNull:false ,
         defaultValue: "user",
-    },   
+    },
+    profile:{
+        type:Sequelize.DataTypes.STRING,
+        allowNull:false,
+        defaultValue:"https://user-profile-pic-bucket.s3.amazonaws.com/f29c8ca4875b6bdbb7639f0900ac49a5"//Default user picture in S3
+    }  
 }, 
 {
     timestamps:false

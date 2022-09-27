@@ -17,11 +17,15 @@ function Login() {
 
   const onSubmit=(data)=>{
       axios
-            .post('http://localhost:3001/User/Login',data)
+            .post(`${process.env.REACT_APP_API_HOST}/User/Login`,data)
             .catch((error)=>{
               setInvalidCredentials("Invalid Credentials. Please try again.")
             })
             .then((response)=>{
+              console.log(response);
+              if(response.data.auth.status == "banned"){
+                setInvalidCredentials("You are banned!")
+              }else{
               localStorage.setItem("token",response.data.token);
               
               setAuthState((prev)=>({
@@ -32,6 +36,7 @@ function Login() {
               }))
               if (response.data.auth.role === "user"){navigate('/');}
               else if (response.data.auth.role === "admin") {navigate('/Admin/Users');}
+            }
             })
   }
 

@@ -10,7 +10,7 @@ async function SearchFriends(req,res,next){
     for(queryItem of queryArray){
        tempList=
             await sequelize.query(
-                "Select `users`.`firstName`, `users`.`lastName`,`users`.`username`,`users`.`id`,`friendstatuses`.`status` from friendstatuses inner join users on friendstatuses.friendId=users.id where (firstName like :query or username like :query or lastName like :query) and userId=:userId order by `friendstatuses`.`status`",
+                "Select `users`.`firstName`, `users`.`lastName`,`users`.`username`,`users`.`id`,`users`.`profile`,`friendstatuses`.`status` from friendstatuses inner join users on friendstatuses.friendId=users.id where (firstName like :query or username like :query or lastName like :query) and userId=:userId order by `friendstatuses`.`status`",
                 {
                     replacements:{
                                 query:queryItem+'%',

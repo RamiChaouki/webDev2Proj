@@ -1,0 +1,10 @@
+.comment{
+    margin: 2% 10%;
+    
+}
+.commentPic{
+    float: left;
+    margin-right: 2%;
+    max-height: 5%;
+    max-width: 5%;
+}

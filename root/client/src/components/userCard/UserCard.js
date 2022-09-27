@@ -17,7 +17,7 @@ const UsersCard=({users,setUsers,loading})=>{
 
     async function removeFriend(id){
         await axios
-                .get(`http://localhost:3001/Friend/Unfriend/${id}`,
+                .get(`${process.env.REACT_APP_API_HOST}/Friend/Unfriend/${id}`,
                         {headers:{
                             accessToken:localStorage.getItem("token")
                         }}
@@ -28,7 +28,7 @@ const UsersCard=({users,setUsers,loading})=>{
 
     async function addFriend(id){
         await axios
-                .get(`http://localhost:3001/Friend/Send_Request/${id}`,
+                .get(`${process.env.REACT_APP_API_HOST}/Friend/Send_Request/${id}`,
                         {headers:{
                             accessToken:localStorage.getItem("token")
                         }}
@@ -54,7 +54,7 @@ const UsersCard=({users,setUsers,loading})=>{
                             <div key={user.username} id="friend-card" className="container d-inline-flex text-white bg-dark">
                             
                                 <div className="col-4">
-                                    <img id="profile-pic" src="https://picsum.photos/50" alt="Profile"></img>
+                                    <img id="profile-pic" src={user.profile} alt="Profile"></img>
                                 </div>
                                 <div className="col-4">
                                     <div className="row">
