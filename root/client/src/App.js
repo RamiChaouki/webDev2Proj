@@ -28,10 +28,10 @@ import RestProvider from 'ra-data-simple-rest';
 import UserList from './components/adminpanel/UserList';
 import UserEdit from './components/adminpanel/UserEdit';
 import UserCreate from './components/adminpanel/UserCreate';
-import MyAppBar from './components/adminpanel/MyAppBar';
 import MyLayout from './components/adminpanel/MyLayout';
 
-// import {UserCreate} from './components/adminpanel/UserCreate'
+
+
 //${process.env.S_PORT}
 function App() {
   return (
@@ -76,10 +76,6 @@ function App() {
                 </Admin>}>
               </Route>
             </Route>
-            
-              {/* <Route path='/Feed' element={<Post/>}></Route> */}
-              {/* <Route path='/Register' element={<Registration/>}></Route>
-              <Route path='/Login' element={<Login/>}></Route>*/}
               <Route path='/Logout' element={[<Home/>,<Logout/>]}></Route>
           </Routes>
         </QueryProvider>

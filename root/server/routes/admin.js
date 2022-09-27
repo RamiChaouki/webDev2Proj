@@ -66,51 +66,76 @@ router.get('/Users', getUserCount, async(req,res,next)=>{  //testing line - orig
     }
 });
 
-// (GET)/Admin/User/id - return info for one user (when clicking on author when browsing posts or when clicking edit)
+// (GET)/Admin//Users?... - SCRAP code for getting pagination to work
 // router.get('/User/:id', validateToken, doesUserExist, apiErrorHandler, async(req, res, next)=>{
-    router.get('/Users?filter={"id":[]}', doesUserExist, apiErrorHandler, async(req, res, next)=>{  //testing line - original above. Tested: Validates token - Good, empty table - Good,broken param - returns empty arr, proper param - Good
+// //    router.get('/Users?sort=[field, order]&range=[page, perPage]&filter={"title":"bar"}', doesUserExist, apiErrorHandler, async(req, res, next)=>{  //testing line - original above. Tested: Validates token - Good, empty table - Good,broken param - returns empty arr, proper param - Good       
 
-        const {ids} = req.params.id;
-        const listOfUsers = await user.findAll({
-            where: {
-              id: ids,
-            }
-          });
-        if (req.doesUserExist==='true'){
-            const listOfUsers = await user.findByPk(id);
-            res.json(listOfUsers);
-        } else{
-            res.status(ErrorApi.code).send(ErrorApi.msg);
-        }
-    });
+//     var _a = params.pagination,
+//     page = _a.page,
+//     perPage = _a.perPage;
+//     var _b = params.sort,
+//     field = _b.field,
+//     order = _b.order;
+//     var query = __assign(__assign({}, 
+//         fetchUtils.flattenObject(params.filter)), {
+//             _sort: field,
+//             _order: order,
+//             _start: (page - 1) * perPage + 1,
+//             _end: page * perPage,
+//         }
+//     );
+//     var url = apiUrl + "/" + resource + "?" + stringify(query);
+    
+//     return httpClient(url).then(function (_a) {
+//     var headers = _a.headers,
+//     json = _a.json;
+//     if (!headers.has("x-total-count")) {
+//         throw new Error(`The X-Total-Count header is missing in the HTTP Response. 
+//         The jsonServer Data Provider expects responses for lists of resources to contain this header 
+//         with the total number of results to build the pagination. If you are using CORS, 
+//         did you declare X-Total-Count in the Access-Control-Expose-Headers header?`);
+//     }
+    
+//     return {
+//         data: json,
+//         total: parseInt(headers.get("x-total-count").split("/").pop(), 10)
+//     };
+// });
 
 
-    //router.post("/Users", confirmNoEmptyField, confirmActDoesntExist, registrationHandler, apiErrorHandler, async (req, res) => {
-        router.post("/Users", confirmNoEmptyField, confirmActDoesntExist, apiErrorHandler, async (req, res, next) => {
+
+        router.post("/Users", confirmNoEmptyField, confirmActDoesntExist, registrationHandler, apiErrorHandler, async (req, res) => {
           const { firstName, lastName, username, email, password, dateOfBirth, status, role } = req.body;
-      
-          bcrypt.hash(password, 10).then((hash) => {
-            user.create({
-              firstName: firstName,
-              lastName: lastName,
-              username: username,
-              email: email,
-              password: hash,
-              dateOfBirth: dateOfBirth,
-              status: status,
-              role: role,
-            }).catch((error) => {
+
+          bcrypt.hash(password, 10)
+          .then(async( hash) => {
+                await user.create({
+                firstName: firstName,
+                lastName: lastName,
+                username: username,
+                email: email,
+                password: hash,
+                dateOfBirth: dateOfBirth,
+                status: status,
+                role: role,
+                })
+            })
+            .catch((error) => {
                 res.status(ErrorApi.code).send(ErrorApi.msg);
-            });
-            res.status(201).json({ Message: "User " + username + " created" });
-          });
-        }
-      );
+            })
+            .then(async ()=>{ 
+                await user.findOne({
+                    where: {
+                      username: username
+                    }
+                })
+                .then((result)=>{res.json(result)})
+            });});
 
 
 // (PUT)/Admin/User/:id - updates the user record from the edited line
 // router.patch('/User/:id', validateToken, doesUserExist, EnsureNoDuplicates, apiErrorHandler, async(req,res)=>{
-    router.put('/Users/:id', doesUserExist, ensureNoDuplicates, apiErrorHandler, async(req,res)=>{ //testing line - original above. Tested: Validates token - Good, empty table - Good,broken param - 400, proper param - Good
+    router.put('/Users/:id', doesUserExist, ensureNoDuplicates, apiErrorHandler, async(req,res)=>{ 
         const id = req.params.id;
         const newValues = req.body;
         if (req.doesUserExist==='true'){
@@ -124,9 +149,8 @@ router.get('/Users', getUserCount, async(req,res,next)=>{  //testing line - orig
     });
 
 
-// (DELETE)/Admin/User/:userId - deletes selected user by pressing X
+// (DELETE)/Admin/User/:userId - deletes selected user by pressing Delete
 router.delete('/Users/:id',  doesUserExist, apiErrorHandler, async(req,res,next)=>{
-//    router.delete('/User/:id', doesUserExist, apiErrorHandler, async(req,res)=>{ //testing line - original above. Tested: Validates token - Good, empty table - Good,broken param - 400, proper param - Good
 
     const id = req.params.id;
     await user.destroy({where: {id:`${id}`}});
@@ -135,11 +159,10 @@ router.delete('/Users/:id',  doesUserExist, apiErrorHandler, async(req,res,next)
     } else res.json(user);
 });
 
-
+//------------------------Unused routes-------------------------
 // (GET)/Admin/Admins/:role - return info for a filtered list by role
 router.get('/filterByRole/:role', validateToken, async(req,res)=>{
-    //router.get('/filteredList/:role',  async(req,res)=>{ //testing line - original above. Tested: Validates token - Good, empty table - Good,broken param - returns empty arr, proper param - Good
-
+   
     const role = req.params.role;
     const filteredList = await user.findAll({where:{
         role: role

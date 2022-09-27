@@ -47,8 +47,10 @@ sequelize.sync().then(()=>{
     app.listen(process.env.S_PORT, ()=>{
         console.log("Listening on port "+process.env.S_PORT);
         //SEEDER
+        // require('./seeders/adminSeeder'); 
+        // Note: username = admin; password = 123456 
         // require('./seeders/userSeeder');
-        // require('./seeders/friendSeeder')();
+        // require('./seeders/friendSeeder');
         // require('./seeders/postSeeder');
         // require('./seeders/commentSeeder');
     })
