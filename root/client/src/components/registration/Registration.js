@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState} from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import * as Yup from 'yup';
 import {Formik, Form, Field,ErrorMessage} from 'formik'
@@ -10,7 +11,7 @@ import './Registration.css';
 function Registration(){
     const [usernameTaken,setUsernameTaken]=useState("");
     const [emailTaken,setEmailTaken]=useState("");
-
+    const navigate=useNavigate();
 
     const onSubmit=(data)=>{axios.post(`${process.env.REACT_APP_API_HOST}/User/Register`,data)
     .catch((error)=>{
@@ -31,7 +32,7 @@ function Registration(){
        }
     })
     .then((res)=>{
-        
+        navigate('/Login')
     }) }
     const initialValues ={
         firstName:"",
