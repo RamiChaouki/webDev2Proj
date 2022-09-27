@@ -21,7 +21,8 @@ function UploadPicture({setMode}) {
         // get secure url from our server
 
         axios
-            .get("http://localhost:3001/s3Url")
+            .get("http://localhost:3001/s3Url",
+                {headers:{accessToken:localStorage.getItem("token")}})
             .then((res)=>{return (res.data.url)})
             .then((url)=>{
                 axios

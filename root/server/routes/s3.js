@@ -8,7 +8,7 @@ const apiErrorHandler=require('./middleware/errorHandling/apiErrorHandler');
 const generateUploadURL = require('./middleware/s3.js')
 
 
-router.get('/',async(req,res)=>{
+router.get('/',JWTvalidation,apiErrorHandler,async(req,res)=>{
     const url=await generateUploadURL();
     res.send({url});
 })
