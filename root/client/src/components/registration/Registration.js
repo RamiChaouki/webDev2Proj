@@ -12,7 +12,7 @@ function Registration(){
     const [emailTaken,setEmailTaken]=useState("");
 
 
-    const onSubmit=(data)=>{axios.post('http://localhost:3001/User/Register',data)
+    const onSubmit=(data)=>{axios.post(`${process.env.REACT_APP_API_HOST}/User/Register`,data)
     .catch((error)=>{
         //reset previous errors
         setEmailTaken("");

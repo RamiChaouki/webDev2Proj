@@ -25,7 +25,7 @@ function UserSearch() {
 
         const fetchUsers= async()=>{
             setLoading(true);
-            const res= await axios.get(`http://localhost:3001/User/Search/${limit}/${page}/${localStorage.getItem("query")}`,
+            const res= await axios.get(`${process.env.REACT_APP_API_HOST}/User/Search/${limit}/${page}/${localStorage.getItem("query")}`,
                                         {headers:{
                                             accessToken:localStorage.getItem("token")
                                                 }

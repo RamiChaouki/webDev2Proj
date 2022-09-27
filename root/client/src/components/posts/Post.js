@@ -75,21 +75,24 @@ function Post(props) {
   const { id } = useParams();
 
   useEffect(() => {
-    const postR = axios
-      .get(`http://localhost:3001/Feed/getPost/${id}`,{
-        headers: { accessToken: localStorage.getItem("token") },}).catch((err)=> {
-          navigate('/QueryError');
-        })
+    axios
+      .get(`${process.env.REACT_APP_API_HOST}/Feed/getPost/${id}`, {
+        headers: { accessToken: localStorage.getItem("token") },
+      })
+      .catch((err) => {
+        navigate("/QueryError");
+      })
       .then((response) => {
         setPost(response.data);
-        const postUserR = axios
-          .get(`http://localhost:3001/User/User/${response.data.userId}`)
+        axios
+          .get(`${process.env.REACT_APP_API_HOST}/User/User/${response.data.userId}`)
           .then((response) => {
             setPostUser(response.data);
           });
-        const commentsR = axios
-          .get(`http://localhost:3001/Feed/getComments/${response.data.id}`,{
-            headers: { accessToken: localStorage.getItem("token") },})
+        axios
+          .get(`${process.env.REACT_APP_API_HOST}/Feed/getComments/${response.data.id}`, {
+            headers: { accessToken: localStorage.getItem("token") },
+          })
           .then((response) => {
             setComments(response.data);
           });
@@ -102,7 +105,7 @@ function Post(props) {
     // data.userId = useAuthState.id;
     data.parentId = id;
     axios
-      .post(`http://localhost:3001/Feed/addComment/${post.id}`, data, {
+      .post(`${process.env.REACT_APP_API_HOST}/Feed/addComment/${post.id}`, data, {
         headers: { accessToken: localStorage.getItem("token") },
       })
       .then((res) => {
@@ -128,8 +131,9 @@ function Post(props) {
       <div className="post card">
         <div className="postText">{post.postText}</div>
         <div className="postFooter">
-          <div className="username">{postUser.username}</div>
-          <div className="postDate">{post.postDate}</div>
+          <img src={postUser.profile} className="postPic"></img>
+          <div className="username">from: {postUser.username}</div>
+          <div className="postDate">date: {post.postDate}</div>
         </div>
       </div>
       <div className="addCommentComponent card">

@@ -21,8 +21,10 @@ function UploadPicture({setMode}) {
         // get secure url from our server
 
         axios
-            .get("http://localhost:3001/s3Url",
+
+            .get(`${process.env.REACT_APP_API_HOST}/s3Url`,
                 {headers:{accessToken:localStorage.getItem("token")}})
+
             .then((res)=>{return (res.data.url)})
             .then((url)=>{
                 axios
@@ -38,7 +40,7 @@ function UploadPicture({setMode}) {
             })
             .then(async (imgUrl)=>{
                 await axios
-                    .put("http://localhost:3001/User/UpdateProfilePic",
+                    .put(`${process.env.REACT_APP_API_HOST}/User/UpdateProfilePic`,
                         {"profile":imgUrl},
                         {headers:{accessToken:localStorage.getItem("token")}})
             })

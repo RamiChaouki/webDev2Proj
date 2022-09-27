@@ -16,7 +16,7 @@ function UserProfile() {
         const fetchProfile =async ()=>{
 
             const res= await axios
-                                .get(`http://localhost:3001/User/User/${id}`,
+                                .get(`${process.env.REACT_APP_API_HOST}/User/User/${id}`,
                                     {headers:
                                         {accessToken:localStorage.getItem("token")}})
                                     

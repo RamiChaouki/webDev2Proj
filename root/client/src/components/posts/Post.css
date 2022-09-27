@@ -1,6 +1,12 @@
-.commentH4{
-    margin-left: 10%;
+.commentH4 {
+  margin-left: 10%;
 }
-.addCommentComponent{
-    margin: 2% 10%;
+.addCommentComponent {
+  margin: 2% 10%;
+}
+.postPic {
+    float: left;
+    margin-right: 2%;
+  max-height: 5%;
+  max-width: 5%;
 }

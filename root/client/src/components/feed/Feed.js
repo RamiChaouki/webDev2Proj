@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useAuth } from "../../context/AuthContext";
 import { useNavigate, Link } from "react-router-dom";
-import './Feed.css';
+import "./Feed.css";
 
 function Feed() {
   const navigate = useNavigate();
@@ -12,7 +12,7 @@ function Feed() {
   useEffect(() => {
     getAuth();
     axios
-      .get("http://localhost:3001/Feed/getFeed/", {
+      .get(`${process.env.REACT_APP_API_HOST}/Feed/getFeed/`, {
         headers: { accessToken: localStorage.getItem("token") },
       })
       .then((res) => {
@@ -40,8 +40,12 @@ function Feed() {
               {value.postText}
             </div>
             <div className="footer">
-              <div className="username">{value.user.username}</div>
-              <div className="postDate">{value.postDate}</div>
+              <img
+                src={value.user.profile}
+                className="postPic"
+              ></img>
+              <div className="username">from: {value.user.username}</div>
+              <div className="postDate">date: {value.postDate}</div>
             </div>
           </div>
         );

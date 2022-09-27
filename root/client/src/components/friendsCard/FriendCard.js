@@ -10,7 +10,7 @@ const FriendsCard=({friends,setFriends,loading,updater,setUpdater})=>{
 
     async function removeFriend(id){
         await axios
-                .get(`http://localhost:3001/Friend/Unfriend/${id}`,
+                .get(`${process.env.REACT_APP_API_HOST}/Friend/Unfriend/${id}`,
                         {headers:{
                             accessToken:localStorage.getItem("token")
                         }}
@@ -22,7 +22,7 @@ const FriendsCard=({friends,setFriends,loading,updater,setUpdater})=>{
 
     async function addFriend(id){
         await axios
-                .get(`http://localhost:3001/Friend/Send_Request/${id}`,
+                .get(`${process.env.REACT_APP_API_HOST}/Friend/Send_Request/${id}`,
                         {headers:{
                             accessToken:localStorage.getItem("token")
                         }}

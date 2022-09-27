@@ -1,7 +1,7 @@
 const {sequelize,Sequelize}=require('./sequelizeConfig');
 
 const friendStatus=sequelize.define(
-    'friendStatus',
+    'friendstatus',
     {
         id:{
             type: Sequelize.DataTypes.INTEGER,

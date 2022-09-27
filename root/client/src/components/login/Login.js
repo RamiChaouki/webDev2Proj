@@ -17,7 +17,7 @@ function Login() {
 
   const onSubmit=(data)=>{
       axios
-            .post('http://localhost:3001/User/Login',data)
+            .post(`${process.env.REACT_APP_API_HOST}/User/Login`,data)
             .catch((error)=>{
               setInvalidCredentials("Invalid Credentials. Please try again.")
             })
