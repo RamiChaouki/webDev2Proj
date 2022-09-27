@@ -7,17 +7,12 @@ function Home() {
   const useAuthState=useAuth().authState;
   const getAuth=useAuth().GetAuth;
   const [quote,setQuote]=useState([]);
-  const feedLinks=useRef("/Login");
-  const postLinks=useRef("/Login");
+
 
   //will fetch state on refresh!
   useEffect(()=>{
     getAuth();
     setQuote(existentialGenerator(existentialQuotes))
-    if(useAuthState!==""){
-      postLinks.current='/NewPost';
-      feedLinks.current='/Feed'
-    }
   },[])
   
 
@@ -56,7 +51,7 @@ function Home() {
       <div id="bigbox" className='row d-flex justify-content-md-center'>
         <div className='col d-flex align-items-center justify-content-center' id="welcome">Welcome home {useAuthState.username}</div>
 
-          <Link className='col links ' to={feedLinks.current}>
+          <Link className='col links ' to={'/Feed'}>
             <div id="feed" className='d-flex align-items-center justify-content-center'>
                 STARE INTO THE ABYSS
             </div>
@@ -65,7 +60,7 @@ function Home() {
       
       <div className="w-100"></div>
       
-        <Link className='col links' to={postLinks.current}>
+        <Link className='col links' to={'/NewPost'}>
           <div id="post" className='d-flex align-items-center justify-content-center'>
               SCREAM INTO THE VOID
           </div>
