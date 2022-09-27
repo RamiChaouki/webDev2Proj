@@ -18,8 +18,6 @@ app.use(express.json());
 app.use(cors());
 
 
-
-
 //ROUTES
 
 //Auth router

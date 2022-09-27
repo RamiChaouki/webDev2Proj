@@ -42,10 +42,10 @@ function App() {
         <QueryProvider>
         <Nav/>
           <Routes>
-
+            <Route path='/' element={[<Home/>]}></Route>
             <Route path='/' element={<UserProtectedRoute/>}>
               
-              <Route path='/' element={[<Home/>]}></Route>
+              
               <Route path='UserSearch' element={<UserSearch/>}></Route>
               <Route path='Friends' element={[<FriendList/>]}></Route>
               <Route path='/NewPost' element={<CreatePost/>}></Route>

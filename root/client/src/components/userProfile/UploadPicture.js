@@ -46,16 +46,8 @@ function UploadPicture({setMode}) {
             })
             .then(()=>{
                 setMode(mode=>!mode);
+                window.location.reload(false);
             })
-                //       console.log(imageUrl);
-                // const img = document.createElement("img")
-                // img.src = imageUrl
-                // document.body.appendChild(img)
-      
-        // const imageUrl = url.split('?')[0]
-        // console.log(imageUrl)
-      
-        // post requst to my server to store any extra data
         
         
         

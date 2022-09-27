@@ -1,0 +1,58 @@
+#homecontainer{
+    margin-top: 50px;
+}
+
+#bigbox{
+
+}
+
+#welcome{
+    display: flex;
+    height: 400px;
+   max-width: 400px;
+    padding: 12px;
+    text-align: center;
+    color:black;
+    font-size:20px;
+    border-top-style: solid;
+    border-left-style: solid;
+    border-color: rgb(41, 43, 44);
+    border-radius: 3px;
+}
+
+#feed{
+    height: 400px;
+    max-width: 400px;
+    padding: 12px;
+    text-align: center;
+    background-color: rgb(41, 43, 44);
+    font-size:30px;
+}
+
+
+#post{
+    height: 400px;
+    max-width: 400px;
+    padding: 12px;
+    align-self: center;
+    text-align: center;
+    background-color: rgb(41, 43, 44);
+    font-size:30px;
+}
+
+#quote-box{
+    height: 400px;
+    max-width: 400px;
+    padding: 12px;
+    color:black;
+    font-size: 20px;
+    border-bottom-style: solid;
+    border-right-style: solid;
+    border-color: rgb(41, 43, 44);
+    border-radius: 3px;
+}
+
+.links{
+    max-width: 400px;
+    padding:0px;
+}
