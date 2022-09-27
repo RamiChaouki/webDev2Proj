@@ -16,7 +16,7 @@ export default function FriendList() {
 
         const fetchFriends= async()=>{
             setLoading(true);
-            const res= await axios.get(`http://localhost:3001/Friend/${limit}/${page}`,
+            const res= await axios.get(`${process.env.REACT_APP_API_HOST}/Friend/${limit}/${page}`,
                                         {headers:{
                                             accessToken:localStorage.getItem("token")
                                                 }

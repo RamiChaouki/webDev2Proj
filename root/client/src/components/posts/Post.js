@@ -75,8 +75,8 @@ function Post(props) {
   const { id } = useParams();
 
   useEffect(() => {
-    const postR = axios
-      .get(`http://localhost:3001/Feed/getPost/${id}`, {
+    axios
+      .get(`${process.env.REACT_APP_API_HOST}/Feed/getPost/${id}`, {
         headers: { accessToken: localStorage.getItem("token") },
       })
       .catch((err) => {
@@ -84,13 +84,13 @@ function Post(props) {
       })
       .then((response) => {
         setPost(response.data);
-        const postUserR = axios
-          .get(`http://localhost:3001/User/User/${response.data.userId}`)
+        axios
+          .get(`${process.env.REACT_APP_API_HOST}/User/User/${response.data.userId}`)
           .then((response) => {
             setPostUser(response.data);
           });
-        const commentsR = axios
-          .get(`http://localhost:3001/Feed/getComments/${response.data.id}`, {
+        axios
+          .get(`${process.env.REACT_APP_API_HOST}/Feed/getComments/${response.data.id}`, {
             headers: { accessToken: localStorage.getItem("token") },
           })
           .then((response) => {
@@ -105,7 +105,7 @@ function Post(props) {
     // data.userId = useAuthState.id;
     data.parentId = id;
     axios
-      .post(`http://localhost:3001/Feed/addComment/${post.id}`, data, {
+      .post(`${process.env.REACT_APP_API_HOST}/Feed/addComment/${post.id}`, data, {
         headers: { accessToken: localStorage.getItem("token") },
       })
       .then((res) => {

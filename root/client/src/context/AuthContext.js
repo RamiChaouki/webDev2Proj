@@ -21,7 +21,7 @@ export function AuthProvider({children}){
 async function GetAuth(){
         if(localStorage.getItem('token')){
            axios
-                .get('http://localhost:3001/Auth',
+                .get(`${process.env.REACT_APP_API_HOST}/Auth`,
                     {headers:{
                                 accessToken:localStorage.getItem("token")
                             }
@@ -45,7 +45,7 @@ async function GetAuth(){
 const fetchAuth = async (accessToken) => {
     const {
       data: { id, user, role },
-    } = await axios.get("http://localhost:3001/Auth", {
+    } = await axios.get(`${process.env.REACT_APP_API_HOST}/Auth`, {
       headers: { accessToken },
     });
   

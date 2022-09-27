@@ -24,7 +24,7 @@ useEffect(()=>{
         await getAuth()
         .then(
             axios
-                        .get(`http://localhost:3001/User/User/${useAuthState.id}`)
+                        .get(`${process.env.REACT_APP_API_HOST}/User/User/${useAuthState.id}`)
                         .then(async (res)=>{
                             profilePic.current=res.data.profile;
                         })

@@ -63,7 +63,7 @@ function App() {
               <Route path='/Admin/*' element={      
                 <Admin layout={MyLayout}
                   basename="/Admin"
-                  dataProvider={RestProvider(`http://localhost:3001/Admin`)}
+                  dataProvider={RestProvider(`${process.env.REACT_APP_API_HOST}/Admin`)}
                   // authProvider={AuthProvider}
                   >
                   

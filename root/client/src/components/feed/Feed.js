@@ -12,7 +12,7 @@ function Feed() {
   useEffect(() => {
     getAuth();
     axios
-      .get("http://localhost:3001/Feed/getFeed/", {
+      .get(`${process.env.REACT_APP_API_HOST}/Feed/getFeed/`, {
         headers: { accessToken: localStorage.getItem("token") },
       })
       .then((res) => {

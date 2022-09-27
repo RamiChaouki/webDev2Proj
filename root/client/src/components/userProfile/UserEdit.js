@@ -20,7 +20,7 @@ function UserEdit({profile,setMode}){
     const useAuthState=useAuth().authState;
 
 
-    const onSubmit=(data)=>{axios.put(`http://localhost:3001/User/UpdateProfile/${id}`,data,
+    const onSubmit=(data)=>{axios.put(`${process.env.REACT_APP_API_HOST}/User/UpdateProfile/${id}`,data,
     {headers:
     {accessToken:localStorage.getItem("token")}})
     .catch((error)=>{
