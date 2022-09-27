@@ -31,7 +31,7 @@ function CreateComment({ onSubmit, parentId }) {
       >
         <Form>
           <div className="row">
-            <label>Post:</label>
+            <label>Enter your comment here:</label>
             <Field name="postText" />
             <ErrorMessage name="postText">
               {(msg) => <div className="errorMsg">{msg}</div>}
